@@ -1,0 +1,12 @@
+PHPMailer/
+system/
+system/css
+system/fonts
+system/img
+system/pdf
+system/js
+web/css
+web/fonts
+web/images
+web/js
+config.php
