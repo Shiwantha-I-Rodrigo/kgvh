@@ -26,4 +26,11 @@ function dataClean($data = null)
     return $data;
 }
 
+
+//Redirect---------------------------------------------
+function reDirect($data = null)
+{
+    echo '<script type="text/javascript">window.location = "'.$data.'";</script>';
+}
+
 ?>

@@ -82,8 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $msg .= "<p>Your account has been successfully created</p>";
         $msg .= "<a href=" . $_CUSTOMER_VERIFICATION_LINK . ">Click here to verifiy your account</a>";
         sendEmail($email, $first_name, "Account Verification", $msg);
-
-        (header("location:register_success.php"));
+        reDirect("http://localhost/web/register_success.php");
     }
 }
 ?>
