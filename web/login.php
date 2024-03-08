@@ -26,13 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $db = dbConn();
         $sql = "SELECT * FROM users WHERE UserName='$username'";
         $result = $db->query($sql);
-
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
-
             if (password_verify($password, $row['Password'])) {
                 $_SESSION['user_id'] = $row['Userid'];
-                reDirect("http://localhost/web/dashboard.php");
+                reDirect("dashboard.php");
             } else {
                 $message['password'] = "Invalid User Name or Password...!";
             }
