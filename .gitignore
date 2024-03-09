@@ -5,7 +5,8 @@ system/fonts
 system/img
 system/pdf
 system/js
-web/css
+web/css/*
+!web/css/style.css
 web/fonts
 web/images
 web/js/*

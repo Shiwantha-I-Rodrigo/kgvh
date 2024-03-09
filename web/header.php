@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site meta -->
-    <title>keto</title>
+    <title>KGVH</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -36,7 +36,7 @@
     <script src="js/functions.js"></script>
 </head>
 
-<body class="main-layout">
+<body class="main-layout" onload="setActive();">
     <!-- loader  -->
     <div class="loader_bg">
         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
@@ -50,37 +50,46 @@
                         <div class="full">
                             <div class="center-desk">
                                 <div class="logo">
-                                    <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                                    <a href="index.php"><img src="images/logo.png" alt="#" /></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
                         <nav class="navigation navbar navbar-expand-md navbar-dark ">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
                             <div class="collapse navbar-collapse" id="navbarsExample04">
                                 <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="index.html">Home</a>
+                                    <li class="nav-item" id="index.php">
+                                        <a class="nav-link" href="index.php">Home</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="about.html">About</a>
+                                    <li class="nav-item" id="about.php">
+                                        <a class="nav-link" href="about.php">About</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="room.html">Our room</a>
+                                    <li class="nav-item" id="room.php">
+                                        <a class="nav-link" href="room.php">Accomadations</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="gallery.html">Gallery</a>
+                                    <li class="nav-item" id="gallery.php">
+                                        <a class="nav-link" href="gallery.php">Gallery</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="blog.html">Blog</a>
+                                    <li class="nav-item" id="blog.php">
+                                        <a class="nav-link" href="blog.php">Blog</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="contact.html">Contact Us</a>
+                                    <li class="nav-item" id="contact.php">
+                                        <a class="nav-link" href="contact.php">Contacts</a>
                                     </li>
                                 </ul>
+
+                                <?php
+                                session_start();
+                                if (!isset($_SESSION['user_id'])) {
+                                    echo '<button class="nav-btn" onclick="reDirect(\'login.php\')">Login</button>';
+                                    echo '<button class="nav-btn" onclick="reDirect(\'register.php\')">Register</button>';
+                                } else {
+                                    echo '<button class="nav-crt" onclick="reDirect(\'logout.php\')">Logout</button>';
+                                    echo '<button class="nav-btn" onclick="reDirect(\'dashboard.php\')">Profile</button>';
+                                }
+                                ?>
+
                             </div>
                         </nav>
                     </div>

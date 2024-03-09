@@ -1,9 +1,11 @@
 <?php
 session_start();
 include 'header.php';
-include '../function.php';
+include '../functions.php';
 include '../config.php';
 ?>
+
+
 <!-- banner -->
 <section class="banner_main">
    <div id="myCarousel" class="carousel slide banner" data-ride="carousel">
@@ -315,7 +317,8 @@ include '../config.php';
       </div>
    </div>
 </div>
-<!-- end contact -->
+
+
 <?php
 include 'footer.php';
 ?>
