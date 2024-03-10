@@ -188,17 +188,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 <!-- Modal -->
-<div class="modal fade" id="success_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade back" id="success_modal" tabindex="-1" role="dialog" aria-labelledby="success_modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <div class="modal-content modals">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalCenterTitle">Confirmation</h3>
+                <img src="images/logo_tiny.png" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                <h3 class="modal-title" id="exampleModalCenterTitle" style="color: #fff; margin-left:10px;">Confirmation</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are You Sure You Want to Submit the Registration ?</p>
+                <p style="color: #fff;">Are You Sure You Want to Submit the Registration ?</p>
             </div>
             <div class="modal-footer">
                 <button class="crit_btn halfL" data-dismiss="modal" aria-label="Close">Cancel</button>

@@ -590,6 +590,8 @@ button {
 .about_img {
      margin-right: 40px;
      overflow: hidden;
+     border: #0f5256 solid 5px;
+     border-radius: 15px;
 }
 
 .about_img figure {
@@ -642,10 +644,12 @@ button {
 .rooms .room .room_img figure img {
      width: 100%;
      transition: all .5s;
+     border: #0f5256 solid 5px;
+     border-radius: 15px;
 }
 
 .rooms .room .room_img figure img:hover {
-     transform: scale(1.2);
+     border: #e74d46 solid 5px;
 }
 
 .rooms .room .room_desc {
@@ -677,6 +681,8 @@ button {
 .gallery .gallery_img {
      overflow: hidden;
      margin-bottom: 30px;
+     border: #0f5256 solid 5px;
+     border-radius: 15px;
 }
 
 .gallery .gallery_img figure {
@@ -708,10 +714,13 @@ button {
      background-color: #fff;
      margin-bottom: 30px;
      transition: ease-in all 0.5s;
+     border: #0f5256 solid 5px;
+     border-radius: 15px;
 }
 
 .blog .blog_box .blog_img {
      overflow: hidden;
+     border-radius: 12px 12px 0px 0px;
 }
 
 .blog .blog_box .blog_img figure {
@@ -892,3 +901,15 @@ ul.social_icon li a:hover {
      background: #fff;
      margin-top: 120px;
 }
+
+/*----------------------------------- modal -----------------------------------*/
+
+.modals {
+     background-color: #0f5256;
+     border-radius: 15px;
+}
+
+.back{
+     background-color: #69ba6a5e;
+}
+
