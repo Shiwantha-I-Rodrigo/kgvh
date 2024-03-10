@@ -143,7 +143,7 @@ button {
 .page_title {
      background-color: #0f1521;
      position: relative;
-     top: 86px;
+     top: 65px;
 }
 
 .page_title .title {
@@ -246,6 +246,24 @@ button {
      float: left;
 }
 
+.full {
+     display: block;
+     width: 100%;
+     text-align: center;
+}
+
+.halfL{
+     display: block;
+     width: 45% !important;
+     float: left;
+}
+
+.halfR{
+     display: block;
+     width: 45% !important;
+     float: right;
+}
+
 
 /*----------------------------------- Forms -----------------------------------*/
 
@@ -280,6 +298,19 @@ button {
      padding: 12px 15px 0 15px;
      box-shadow: 2px 0px 6px rgba(255, 9, 9, 0.20);
      height: 150px;
+}
+
+.main_form label {
+     color: #ffffff;
+     font-size: 14px;
+     font-weight: normal;
+}
+
+.main_form h1 {
+     color: #ffffff;
+     font-size: 24px;
+     margin-bottom: 25px;
+
 }
 
 #request *::placeholder {
@@ -318,12 +349,12 @@ button {
 
 .navigation.navbar {
      float: right;
-     padding-top: 14px !important;
+     padding-top: 0px !important;
      padding: 0;
 }
 
 .navigation.navbar-dark .navbar-nav .nav-link {
-     padding: 7px 0px 27px 0px;
+     padding: 7px 0px 18px 0px;
      margin: 0 22px;
      color: #ffffff;
      font-size: 16px;
@@ -350,8 +381,8 @@ button {
 .header {
      position: fixed;
      width: 100%;
-     height: 86px;
-     padding: 15px 0px 0px 0px;
+     height: 65px;
+     padding: 10px 0px 0px 0px;
      background: #0f5256;
      z-index: 999;
 }
@@ -362,7 +393,7 @@ button {
      text-align: center;
      border-radius: 8px;
      padding: 7px 15px 7px 15px;
-     margin: 0px 20px 22px 20px;
+     margin: 6px 20px 22px 20px;
      color: #ffffff;
      font-size: 16px;
      line-height: 20px;
@@ -410,7 +441,7 @@ button {
      display: none;
      width: 100%;
      height: 25px;
-     top: 86px;
+     top: 65px;
      left: 0;
      right: 0;
      bottom: 0;
@@ -434,7 +465,7 @@ button {
 
 .banner_main {
      position: relative;
-     top: 86px;
+     top: 65px;
 }
 
 .banner .carousel-indicators li {
@@ -853,4 +884,11 @@ ul.social_icon li a:hover {
 
 .copyright a:hover {
      color: #03e245;
+}
+
+/*----------------------------------- Login -----------------------------------*/
+
+.login {
+     background: #fff;
+     margin-top: 120px;
 }
