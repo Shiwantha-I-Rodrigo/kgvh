@@ -66,15 +66,16 @@ include '../config.php';
    </div>
 </section>
 <!-- end banner -->
+
 <!-- about -->
 <div class="about">
-   <div class="container-fluid">
+   <div class="container">
       <div class="row">
          <div class="col-md-5">
-            <div class="titlepage">
+            <div class="title_page">
                <h2>About Us</h2>
                <p>The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software. Today it's seen all around the web; on templates, websites, and stock designs. Use our generator to get your own, or read on for the authoritative history of lorem ipsum. </p>
-               <a class="read_more" href="Javascript:void(0)"> Read More</a>
+               <button class="common_btn">Read More</button>
             </div>
          </div>
          <div class="col-md-7">
@@ -86,12 +87,13 @@ include '../config.php';
    </div>
 </div>
 <!-- end about -->
-<!-- our_room -->
-<div class="our_room">
+
+<!-- room -->
+<div class="rooms">
    <div class="container">
       <div class="row">
          <div class="col-md-12">
-            <div class="titlepage">
+            <div class="title_page">
                <h2>Our Room</h2>
                <p>Lorem Ipsum available, but the majority have suffered </p>
             </div>
@@ -103,7 +105,7 @@ include '../config.php';
                <div class="room_img">
                   <figure><img src="images/room1.jpg" alt="#" /></figure>
                </div>
-               <div class="bed_room">
+               <div class="room_desc">
                   <h3>Bed Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
@@ -114,7 +116,7 @@ include '../config.php';
                <div class="room_img">
                   <figure><img src="images/room2.jpg" alt="#" /></figure>
                </div>
-               <div class="bed_room">
+               <div class="room_desc">
                   <h3>Bed Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
@@ -125,7 +127,7 @@ include '../config.php';
                <div class="room_img">
                   <figure><img src="images/room3.jpg" alt="#" /></figure>
                </div>
-               <div class="bed_room">
+               <div class="room_desc">
                   <h3>Bed Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
@@ -136,7 +138,7 @@ include '../config.php';
                <div class="room_img">
                   <figure><img src="images/room4.jpg" alt="#" /></figure>
                </div>
-               <div class="bed_room">
+               <div class="room_desc">
                   <h3>Bed Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
@@ -147,7 +149,7 @@ include '../config.php';
                <div class="room_img">
                   <figure><img src="images/room5.jpg" alt="#" /></figure>
                </div>
-               <div class="bed_room">
+               <div class="room_desc">
                   <h3>Bed Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
@@ -158,7 +160,7 @@ include '../config.php';
                <div class="room_img">
                   <figure><img src="images/room6.jpg" alt="#" /></figure>
                </div>
-               <div class="bed_room">
+               <div class="room_desc">
                   <h3>Bed Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
@@ -167,13 +169,14 @@ include '../config.php';
       </div>
    </div>
 </div>
-<!-- end our_room -->
+<!-- end room -->
+
 <!-- gallery -->
 <div class="gallery">
    <div class="container">
       <div class="row">
          <div class="col-md-12">
-            <div class="titlepage">
+            <div class="title_page">
                <h2>gallery</h2>
             </div>
          </div>
@@ -223,12 +226,13 @@ include '../config.php';
    </div>
 </div>
 <!-- end gallery -->
+
 <!-- blog -->
 <div class="blog">
    <div class="container">
       <div class="row">
          <div class="col-md-12">
-            <div class="titlepage">
+            <div class="title_page">
                <h2>Blog</h2>
                <p>Lorem Ipsum available, but the majority have suffered </p>
             </div>
@@ -275,34 +279,35 @@ include '../config.php';
    </div>
 </div>
 <!-- end blog -->
+
 <!--  contact -->
 <div class="contact">
    <div class="container">
       <div class="row">
          <div class="col-md-12">
-            <div class="titlepage">
+            <div class="title_page">
                <h2>Contact Us</h2>
             </div>
          </div>
       </div>
       <div class="row">
          <div class="col-md-6">
-            <form id="request" class="main_form">
+            <form id="contact_us" class="main_form">
                <div class="row">
                   <div class="col-md-12 ">
-                     <input class="contactus" placeholder="Name" type="type" name="Name">
+                     <input class="inputs" placeholder="Name" type="type" name="Name">
                   </div>
                   <div class="col-md-12">
-                     <input class="contactus" placeholder="Email" type="type" name="Email">
+                     <input class="inputs" placeholder="Email" type="type" name="Email">
                   </div>
                   <div class="col-md-12">
-                     <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number">
+                     <input class="inputs" placeholder="Phone Number" type="type" name="Phone Number">
                   </div>
                   <div class="col-md-12">
-                     <textarea class="textarea" placeholder="Message" type="type" Message="Name">Message</textarea>
+                     <textarea class="textareas" placeholder="Message" type="type" Message="Name"></textarea>
                   </div>
                   <div class="col-md-12">
-                     <button class="send_btn">Send</button>
+                     <button class="sub_btn">Send Message</button>
                   </div>
                </div>
             </form>
@@ -310,7 +315,7 @@ include '../config.php';
          <div class="col-md-6">
             <div class="map_main">
                <div class="map-responsive">
-                  <iframe src=<?php $_HOTEL_LOCATION ?> width="600" height="400" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+                  <iframe src=<?php global $_HOTEL_LOCATION; echo $_HOTEL_LOCATION ?> width="600" height="400" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
                </div>
             </div>
          </div>

@@ -9,3 +9,11 @@ function setActive(){
 	element.classList.add("active");
 	// element.classList.remove("otherclass");
 };
+
+function userNameOn() {
+	document.getElementById("user_overlay").style.display = "block";
+  }
+  
+  function userNameOff() {
+	document.getElementById("user_overlay").style.display = "none";
+  }

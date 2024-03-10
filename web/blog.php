@@ -4,7 +4,7 @@ include 'header.php';
 ?>
 
 
-<div class="back_re">
+<div class="page_title">
    <div class="container">
       <div class="row">
          <div class="col-md-12">
@@ -15,17 +15,9 @@ include 'header.php';
       </div>
    </div>
 </div>
-<!-- blog -->
+
 <div class="blog">
    <div class="container">
-      <div class="row">
-         <div class="col-md-12">
-            <div class="titlepage">
-
-               <p class="margin_0">Lorem Ipsum available, but the majority have suffered </p>
-            </div>
-         </div>
-      </div>
       <div class="row">
          <div class="col-md-4">
             <div class="blog_box">

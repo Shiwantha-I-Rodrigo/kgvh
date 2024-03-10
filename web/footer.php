@@ -23,9 +23,9 @@
                 </div>
                 <div class="col-md-4">
                     <h3>News letter</h3>
-                    <form class="bottom_form">
-                        <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
-                        <button class="sub_btn">subscribe</button>
+                    <form class="main_form">
+                        <input class="inputs" placeholder="Enter your email" type="text" name="Enter your email">
+                        <button class="common_btn">subscribe</button>
                     </form>
                     <ul class="social_icon">
                         <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -40,11 +40,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 offset-md-1">
-
                         <p>
                             © 2024 All Rights Reserved. Design by <a href="https://github.com/Shiwantha-I-Rodrigo">Shiwantha Rodrigo</a>
                         </p>
-
                     </div>
                 </div>
             </div>

@@ -1,10 +1,11 @@
 <?php
 session_start();
 include 'header.php';
+include '../config.php';
 ?>
 
 
-<div class="back_re">
+<div class="page_title">
    <div class="container">
       <div class="row">
          <div class="col-md-12">
@@ -15,27 +16,27 @@ include 'header.php';
       </div>
    </div>
 </div>
-<!--  contact -->
+
 <div class="contact">
    <div class="container">
       <div class="row">
          <div class="col-md-6">
-            <form id="request" class="main_form">
+            <form id="contact_us" class="main_form">
                <div class="row">
                   <div class="col-md-12 ">
-                     <input class="contactus" placeholder="Name" type="type" name="Name">
+                     <input class="inputs" placeholder="Name" type="type" name="Name">
                   </div>
                   <div class="col-md-12">
-                     <input class="contactus" placeholder="Email" type="type" name="Email">
+                     <input class="inputs" placeholder="Email" type="type" name="Email">
                   </div>
                   <div class="col-md-12">
-                     <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number">
+                     <input class="inputs" placeholder="Phone Number" type="type" name="Phone Number">
                   </div>
                   <div class="col-md-12">
-                     <textarea class="textarea" placeholder="Message" type="type" Message="Name">Message</textarea>
+                     <textarea class="textareas" placeholder="Message" type="type" Message="Name"></textarea>
                   </div>
                   <div class="col-md-12">
-                     <button class="send_btn">Send</button>
+                     <button class="sub_btn">Send Message</button>
                   </div>
                </div>
             </form>
@@ -43,7 +44,7 @@ include 'header.php';
          <div class="col-md-6">
             <div class="map_main">
                <div class="map-responsive">
-                  <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="400" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+                  <iframe src=<?php global $_HOTEL_LOCATION; echo $_HOTEL_LOCATION ?> width="600" height="400" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
                </div>
             </div>
          </div>

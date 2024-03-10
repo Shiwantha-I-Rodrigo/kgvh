@@ -66,7 +66,7 @@
                                         <a class="nav-link" href="about.php">About</a>
                                     </li>
                                     <li class="nav-item" id="room.php">
-                                        <a class="nav-link" href="room.php">Accomadations</a>
+                                        <a class="nav-link" href="room.php">Rooms</a>
                                     </li>
                                     <li class="nav-item" id="gallery.php">
                                         <a class="nav-link" href="gallery.php">Gallery</a>
@@ -75,7 +75,7 @@
                                         <a class="nav-link" href="blog.php">Blog</a>
                                     </li>
                                     <li class="nav-item" id="contact.php">
-                                        <a class="nav-link" href="contact.php">Contacts</a>
+                                        <a class="nav-link" href="contact.php">Message</a>
                                     </li>
                                 </ul>
 
@@ -97,3 +97,6 @@
             </div>
         </div>
     </header>
+    <div id="user_overlay" onclick="reDirect('dashboard.php')">
+        <div id="user_overlay_text">Welcome Back</div>
+    </div>

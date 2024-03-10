@@ -4,7 +4,7 @@ include 'header.php';
 ?>
 
 
-<div class="back_re">
+<div class="page_title">
    <div class="container">
       <div class="row">
          <div class="col-md-12">
@@ -15,10 +15,9 @@ include 'header.php';
       </div>
    </div>
 </div>
-<!-- gallery -->
+
 <div class="gallery">
    <div class="container">
-
       <div class="row">
          <div class="col-md-3 col-sm-6">
             <div class="gallery_img">

@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="titlepage">
+                    <div class="title_page">
                         <h2>Registration</h2>
                     </div>
                 </div>
