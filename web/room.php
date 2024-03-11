@@ -21,7 +21,7 @@ include 'header.php';
       <div class="row">
          <div class="col-md-12">
             <div class="title_page">
-               <p>Room types available</p>
+               <p>Rooms Available</p>
             </div>
          </div>
       </div>
@@ -32,7 +32,7 @@ include 'header.php';
                   <figure><img src="images/room1.jpg" alt="#" /></figure>
                </div>
                <div class="room_desc">
-                  <h3>Bed Room</h3>
+                  <h3>Standard Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
             </div>
@@ -43,7 +43,7 @@ include 'header.php';
                   <figure><img src="images/room2.jpg" alt="#" /></figure>
                </div>
                <div class="room_desc">
-                  <h3>Bed Room</h3>
+                  <h3>Deulux Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
             </div>
@@ -54,7 +54,7 @@ include 'header.php';
                   <figure><img src="images/room3.jpg" alt="#" /></figure>
                </div>
                <div class="room_desc">
-                  <h3>Bed Room</h3>
+                  <h3>Luxary Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
             </div>
@@ -65,7 +65,7 @@ include 'header.php';
                   <figure><img src="images/room4.jpg" alt="#" /></figure>
                </div>
                <div class="room_desc">
-                  <h3>Bed Room</h3>
+                  <h3>VIP Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
             </div>
@@ -76,7 +76,7 @@ include 'header.php';
                   <figure><img src="images/room5.jpg" alt="#" /></figure>
                </div>
                <div class="room_desc">
-                  <h3>Bed Room</h3>
+                  <h3>Family Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
             </div>
@@ -87,7 +87,7 @@ include 'header.php';
                   <figure><img src="images/room6.jpg" alt="#" /></figure>
                </div>
                <div class="room_desc">
-                  <h3>Bed Room</h3>
+                  <h3>Personal Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
             </div>

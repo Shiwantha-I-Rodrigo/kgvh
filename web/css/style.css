@@ -214,6 +214,13 @@ button {
      float: left;
 }
 
+.common_btn:focus,
+.common_btn:hover {
+     background-color: #a5c5c5;
+     color: #0f5256;
+     transition: ease-in 0.5s;
+}
+
 .crit_btn {
      background-color: #e74d46;
      border: none;
@@ -230,6 +237,13 @@ button {
      float: left;
 }
 
+.crit_btn:focus,
+.crit_btn:hover {
+     background-color: #a5c5c5;
+     color: #0f5256;
+     transition: ease-in 0.5s;
+}
+
 .sub_btn {
      background-color: #0f5256;
      border: none;
@@ -244,6 +258,13 @@ button {
      text-transform: uppercase;
      transition: ease-in 0.5s;
      float: left;
+}
+
+.sub_btn:focus,
+.sub_btn:hover {
+     background-color: #a5c5c5;
+     color: #0f5256;
+     transition: ease-in 0.5s;
 }
 
 .full {
@@ -405,7 +426,7 @@ button {
 
 .header .nav-btn:focus,
 .header .nav-btn:hover {
-     background-color: #fff;
+     background-color: #a5c5c5;
      color: #0f5256;
      transition: ease-in 0.5s;
 }
@@ -428,7 +449,7 @@ button {
 
 .header .nav-crt:focus,
 .header .nav-crt:hover {
-     background-color: #fff;
+     background-color: #a5c5c5;
      color: #e74d46;
      transition: ease-in 0.5s;
 }

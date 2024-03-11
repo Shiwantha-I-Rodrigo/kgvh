@@ -106,7 +106,7 @@ include '../config.php';
                   <figure><img src="images/room1.jpg" alt="#" /></figure>
                </div>
                <div class="room_desc">
-                  <h3>Bed Room</h3>
+                  <h3>Standard Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
             </div>
@@ -117,7 +117,7 @@ include '../config.php';
                   <figure><img src="images/room2.jpg" alt="#" /></figure>
                </div>
                <div class="room_desc">
-                  <h3>Bed Room</h3>
+                  <h3>Deulux Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
             </div>
@@ -128,7 +128,7 @@ include '../config.php';
                   <figure><img src="images/room3.jpg" alt="#" /></figure>
                </div>
                <div class="room_desc">
-                  <h3>Bed Room</h3>
+                  <h3>Luxary Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
             </div>
@@ -139,7 +139,7 @@ include '../config.php';
                   <figure><img src="images/room4.jpg" alt="#" /></figure>
                </div>
                <div class="room_desc">
-                  <h3>Bed Room</h3>
+                  <h3>VIP Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
             </div>
@@ -150,7 +150,7 @@ include '../config.php';
                   <figure><img src="images/room5.jpg" alt="#" /></figure>
                </div>
                <div class="room_desc">
-                  <h3>Bed Room</h3>
+                  <h3>Family Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
             </div>
@@ -161,7 +161,7 @@ include '../config.php';
                   <figure><img src="images/room6.jpg" alt="#" /></figure>
                </div>
                <div class="room_desc">
-                  <h3>Bed Room</h3>
+                  <h3>Personal Room</h3>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
                </div>
             </div>
@@ -233,7 +233,7 @@ include '../config.php';
       <div class="row">
          <div class="col-md-12">
             <div class="title_page">
-               <h2>Blog</h2>
+               <h2>Destinations</h2>
                <p>Lorem Ipsum available, but the majority have suffered </p>
             </div>
          </div>
@@ -245,7 +245,7 @@ include '../config.php';
                   <figure><img src="images/blog1.jpg" alt="#" /></figure>
                </div>
                <div class="blog_room">
-                  <h3>Bed Room</h3>
+                  <h3>Olu Lake</h3>
                   <span>The standard chunk </span>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generatorsIf you are </p>
                </div>
@@ -257,7 +257,7 @@ include '../config.php';
                   <figure><img src="images/blog2.jpg" alt="#" /></figure>
                </div>
                <div class="blog_room">
-                  <h3>Bed Room</h3>
+                  <h3>Damro Tea Plantation</h3>
                   <span>The standard chunk </span>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generatorsIf you are </p>
                </div>
@@ -269,7 +269,7 @@ include '../config.php';
                   <figure><img src="images/blog3.jpg" alt="#" /></figure>
                </div>
                <div class="blog_room">
-                  <h3>Bed Room</h3>
+                  <h3>Aranya Temple</h3>
                   <span>The standard chunk </span>
                   <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generatorsIf you are </p>
                </div>
