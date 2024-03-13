@@ -15,11 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $message = array();
 
-  if (empty($user_name)) {
-    $message['user_name'] = "User Name should not be empty...!";
-  }
   if (empty($password)) {
-    $message['password'] = "Password should not be empty...!";
+    $message['message'] = "Password should not be empty...!";
+  }
+  if (empty($user_name)) {
+    $message['message'] = "User Name should not be empty...!";
   }
 
   if (empty($message)) {
@@ -29,14 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result->num_rows == 1) {
       $row = $result->fetch_assoc();
       if (password_verify($password, $row['Password'])) {
-        $_SESSION['user_id'] = $row['Userid'];
+        $_SESSION['user_id'] = $row['UserId'];
         $_SESSION['user_name'] = $user_name;
         reDirect("dashboard.php");
       } else {
-        $message['password'] = "Invalid User Name or Password...!";
+        $message['message'] = "Invalid User Name or Password...!";
       }
     } else {
-      $message['password'] = "Invalid User Name or Password...!";
+      $message['message'] = "Invalid User Name or Password...!";
     }
   }
 }
@@ -61,17 +61,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="form-outline mb-4">
                       <input type="text" class="form-control inputs" name="user_name" id="user_name" placeholder="Username" required />
-                      <span class="text-danger"><?= @$message['user_name'] ?></span>
                     </div>
                     <div class="form-outline mb-4">
                       <input type="password" class="form-control inputs" name="password" id="password" placeholder="Password" required />
-                      <span class="text-danger"><?= @$message['password'] ?></span>
                     </div>
                     <div class="pt-1 mb-4">
                       <button class="common_btn full" type="submit" formmethod="post">Login</button>
                     </div>
                     <a class="small" style="color: #fff;" href="index.php">Forgot password?</a>
-                    <p class="mb-5 pb-lg-2" style="color: #fff;"> Don't have an account ? <a href="register.php" style="color: #a5c5c5;"> Register here </a></p>
+                    <p class="mb-3 pb-lg-2" style="color: #fff;"> Don't have an account ? <a href="register.php" style="color: #a5c5c5;"> Register here </a></p>
+                    <p style="padding:0 0 0 0;margin:0 0 0 0;color:#e74d46"><?= @$message['message'] ?></p>
                     <a href="index.php" class="small text-muted">Terms of use.</a>
                     <a href="index.php" class="small text-muted">Privacy policy</a>
                   </form>

@@ -221,6 +221,12 @@ button {
      transition: ease-in 0.5s;
 }
 
+.common_btn:disabled {
+     background-color: #797373;
+     color: #ffffff;
+     transition: ease-in 0.5s;
+}
+
 .crit_btn {
      background-color: #e74d46;
      border: none;
@@ -241,6 +247,12 @@ button {
 .crit_btn:hover {
      background-color: #a5c5c5;
      color: #0f5256;
+     transition: ease-in 0.5s;
+}
+
+.crit_btn:disabled {
+     background-color: #797373;
+     color: #ffffff;
      transition: ease-in 0.5s;
 }
 
@@ -267,24 +279,36 @@ button {
      transition: ease-in 0.5s;
 }
 
-.full {
-     display: block;
-     width: 100%;
-     text-align: center;
+.sub_btn:disabled {
+     background-color: #797373;
+     color: #ffffff;
+     transition: ease-in 0.5s;
 }
 
-.halfL{
+.full {
+     display: block;
+     width: 100% !important;
+     text-align: center;
+     float: left;
+}
+
+.halfL {
      display: block;
      width: 45% !important;
      float: left;
 }
 
-.halfR{
+.halfR {
      display: block;
      width: 45% !important;
      float: right;
 }
 
+.fullL {
+     display: block;
+     width: 100% !important;
+     float: left;
+}
 
 /*----------------------------------- Forms -----------------------------------*/
 
@@ -319,6 +343,12 @@ button {
      padding: 12px 15px 0 15px;
      box-shadow: 2px 0px 6px rgba(255, 9, 9, 0.20);
      height: 150px;
+}
+
+.main_form .inputs:focus {
+     outline: none;
+     border-color: #9ecaed;
+     box-shadow: 0 0 10px #9ecaed;
 }
 
 .main_form label {
@@ -930,7 +960,39 @@ ul.social_icon li a:hover {
      border-radius: 15px;
 }
 
-.back{
+.back {
      background-color: #69ba6a5e;
 }
 
+/*----------------------------------- password meter -----------------------------------*/
+
+.wrong .tickk {
+     display: none;
+}
+
+.good .tickx {
+     display: none;
+}
+
+.password_meter {
+     background-color: #0f5256;
+     border-radius: 15px;
+     color: #ffffff;
+     font-size: 11px;
+     line-height: 22px;
+     text-align: left;
+     border: #a3aec6 solid 3px;
+     font-weight: normal;
+}
+
+.red_glow {
+     outline: none !important;
+     border-color: #ff0d00 !important;
+     box-shadow: 0 0 15px #ff0d00 !important;
+}
+
+.green_glow {
+     outline: none !important;
+     border-color: #03e245 !important;
+     box-shadow: 0 0 15px #03e245 !important;
+}

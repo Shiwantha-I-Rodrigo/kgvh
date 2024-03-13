@@ -56,15 +56,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message['user_name'] = "This user name address already exsist...!";
         }
     }
+
     if (empty($password)) {
         $message['password'] = "The password should not be blank...!";
     } elseif (strlen($password) < 8 or strlen($password) > 64) {
         $message['password'] = "The password should be between 8 and 64 characters...!";
+    }elseif (strlen($password) < 8 or strlen($password) > 64) {
+        $message['password'] = "The password should be between 8 and 64 characters...!";
+    }elseif (strlen($password) < 8 or strlen($password) > 64) {
+        $message['password'] = "The password should be between 8 and 64 characters...!";
     }
+
     if (empty($message)) {
         $pw_hash = password_hash($password, PASSWORD_BCRYPT);
         $db = dbConn();
-        $sql = "INSERT INTO `users`(`UserName`, `Password`) VALUES ('$user_name','$pw_hash')";
+        $sql = "INSERT INTO `users`(`UserName`, `Password`,`UserLevel`) VALUES ('$user_name','$pw_hash','1')";
         $db->query($sql);
 
         $user_id = $db->insert_id;
@@ -72,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['reg_no'] = $reg_no;
         $_SESSION['user_name'] = $user_name;
 
-        $sql = "INSERT INTO `customers`(`FirstName`, `LastName`, `Email`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `TelNo`, `MobileNo`, `Gender`, `DistrictId`,`RegNo`,`UserId`) VALUES ('$first_name','$last_name','$email','$address_line1','$address_line2','$address_line3','$telephone','$mobile','$gender','$nationality','$reg_no','$user_id')";
+        $sql = "INSERT INTO `customers`(`FirstName`, `LastName`, `Email`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `TelNo`, `MobileNo`, `Gender`, `Nationality`,`RegNo`,`UserId`) VALUES ('$first_name','$last_name','$email','$address_line1','$address_line2','$address_line3','$telephone','$mobile','$gender','$nationality','$reg_no','$user_id')";
         $db->query($sql);
 
         $msg = "<h1>SUCCESS</h1>";
@@ -108,8 +114,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <span class="text-danger halfL"><?= @$message['user_name'] ?></span>
                                         <span class="text-danger halfR"><?= @$message['password'] ?></span>
                                         <input type="text" class="form-control inputs halfL" name="user_name" id="user_name" placeholder="Username *" required />
-                                        <input type="password" class="form-control inputs halfR" name="password" id="password" placeholder="Password *" required />
-                                        
+                                        <input type="password" class="form-control inputs halfR" name="password" id="password" placeholder="Password *" required>
+
+
+                                        <div class="fullL">
+                                            <div class="alert px-4 py-3 mb-0 d-none password_meter" role="alert" id="password-alert">
+                                                <ul class="list-unstyled mb-0">
+                                                    <li class="requirements leng">
+                                                        <img class="tickk" src="images/icons/tick.png" id="leng_tick" alt=">" />
+                                                        <img class="tickx" src="images/icons/x.png" id="leng_x" alt="x" />
+                                                        password must have at least 8 chars
+                                                    </li>
+                                                    <li class="requirements cap">
+                                                        <img class="tickk" src="images/icons/tick.png" id="cap_tick" alt=">" />
+                                                        <img class="tickx" src="images/icons/x.png" id="cap_x" alt="x" />
+                                                        password must have a capital letter.
+                                                    </li>
+                                                    <li class="requirements num">
+                                                        <img class="tickk" src="images/icons/tick.png" id="num_tick" alt=">" />
+                                                        <img class="tickx" src="images/icons/x.png" id="num_x" alt="x" />
+                                                        password must have a number.
+                                                    </li>
+                                                    <li class="requirements char">
+                                                        <img class="tickk" src="images/icons/tick.png" id="chr_tick" alt=">" />
+                                                        <img class="tickx" src="images/icons/x.png" id="chr_x" alt="x" />
+                                                        password must have a special character.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+                                        <label class="halfL">NIC</label>
+                                        <label class="halfR">Confirm Password</label>
+                                        <span class="text-danger halfL"><?= @$message['nic'] ?></span>
+                                        <span class="text-danger halfR"><?= @$message['password2'] ?></span>
+                                        <input type="text" class="form-control inputs halfL" name="nic" id="nic" placeholder="National ID Card Number" />
+                                        <input type="password" class="form-control inputs halfR" name="password2" id="password2" placeholder="Confirm Password *" required>
 
                                         <label class="halfL">Email</label>
                                         <span class="text-danger halfR"><?= @$message['email'] ?></span>
@@ -122,13 +163,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <input type="text" class="form-control inputs halfL" name="first_name" id="first_name" placeholder="First Name *" required />
                                         <input type="text" class="form-control inputs halfR" name="last_name" id="last_name" placeholder="Last Name *" required />
 
-                                        <label class="halfL">NIC</label>
-                                        <label class="halfR">Birthday</label>
-                                        <span class="text-danger halfL"><?= @$message['nic'] ?></span>
-                                        <span class="text-danger halfR"><?= @$message['birthday'] ?></span>
-                                        <input type="text" class="form-control inputs halfL" name="nic" id="nic" placeholder="National ID Card Number" />
-                                        <input type="date" class="form-control inputs halfR" name="birthday" id="birthday" placeholder="Birth Day" />
-
                                         <label class="halfL">Address</label>
                                         <span class="text-danger halfR"><?= @$message['address'] ?></span>
                                         <input type="text" class="form-control inputs" name="address1" id="address1" placeholder="House/Building No." />
@@ -137,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                                         <?php
                                         $db = dbConn();
-                                        $sql = "SELECT * FROM  districts";
+                                        $sql = "SELECT * FROM  nationals";
                                         $result = $db->query($sql);
                                         ?>
 
@@ -169,9 +203,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <label class="halfL">About You</label>
                                         <span class="text-danger halfR"><?= @$message['about'] ?></span>
                                         <input type="text" class="form-control inputs" name="about" id="about" placeholder="Something About You " />
-                                        
+
                                     </form>
-                                    <button class="common_btn full" data-toggle="modal" data-target="#success_modal">Submit</button>
+                                    <button class="common_btn full" name="sub_btn" id="sub_btn" data-toggle="modal" data-target="#success_modal" disabled>Submit</button>
                                     <p style="color: #fff;"> Already have an account ? <a href="login.php" style="color: #a5c5c5;"> Login here </a></p>
                                     <p style="color: #fff; margin-top: 20px;" class="text-muted"> Required fields are indicated with a '*' mark </p>
                                     <a href="index.php" class="small text-muted">Terms of use.</a>

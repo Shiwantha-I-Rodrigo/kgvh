@@ -92,5 +92,5 @@
         </div>
     </header>
     <div id="user_overlay" onclick="reDirect('dashboard.php')">
-        <div id="user_overlay_text">Welcome Back</div>
+        <div id="user_overlay_text">Welcome Back <?php echo $_SESSION['user_name']?></div>
     </div>

@@ -12,16 +12,13 @@ include 'header.php';
         <div class="row">
             <div class="col-md-12">
                 <div class="title">
-                    <h2>Dashboard</h2>
+                    <h2 onclick="userNameOn();">Dashboard</h2>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div>
-    <button onclick="userNameOn();">logout</button>
-</div>
 
 
 <?php
