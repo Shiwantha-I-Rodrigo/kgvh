@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <label class="halfR">Confirm Password</label>
                                         <span class="text-danger halfL"><?= @$message['nic'] ?></span>
                                         <span class="text-danger halfR"><?= @$message['password2'] ?></span>
-                                        <input type="text" class="form-control inputs halfL" name="nic" id="nic" placeholder="National ID Card Number" />
+                                        <input type="text" class="form-control inputs halfL" name="nic" id="nic" placeholder="National ID Card Number" maxlength="12"/>
                                         <input type="password" class="form-control inputs halfR" name="password2" id="password2" placeholder="Confirm Password *" required>
 
                                         <label class="halfL">Email</label>
@@ -197,12 +197,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <label class="halfR">Telephone</label>
                                         <span class="text-danger halfL"><?= @$message['mobile'] ?></span>
                                         <span class="text-danger halfR"><?= @$message['telephone'] ?></span>
-                                        <input type="text" class="form-control inputs halfL" name="mobile" id="mobile" placeholder="Mobile No." />
-                                        <input type="text" class="form-control inputs halfR" name="telephone" id="telephone" placeholder="Telephone No." />
+                                        <input type="text" class="form-control inputs halfL" name="mobile" id="mobile" placeholder="Mobile No." maxlength="18"/>
+                                        <input type="text" class="form-control inputs halfR" name="telephone" id="telephone" placeholder="Telephone No." maxlength="18"/>
 
                                         <label class="halfL">About You</label>
                                         <span class="text-danger halfR"><?= @$message['about'] ?></span>
-                                        <input type="text" class="form-control inputs" name="about" id="about" placeholder="Something About You " />
+                                        <input type="text" class="form-control inputs" name="about" id="about" placeholder="Something About You " maxlength="128"/>
 
                                     </form>
                                     <button class="common_btn full" name="sub_btn" id="sub_btn" data-toggle="modal" data-target="#success_modal" disabled>Submit</button>

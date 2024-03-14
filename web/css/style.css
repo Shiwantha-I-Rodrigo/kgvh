@@ -996,3 +996,9 @@ ul.social_icon li a:hover {
      border-color: #03e245 !important;
      box-shadow: 0 0 15px #03e245 !important;
 }
+
+.yellow_glow {
+     outline: none !important;
+     border-color: #c8ff00 !important;
+     box-shadow: 0 0 15px #c8ff00 !important;
+}
