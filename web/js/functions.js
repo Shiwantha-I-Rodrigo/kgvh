@@ -35,6 +35,8 @@ addEventListener("DOMContentLoaded", (event) => {
 	const email = document.getElementById("email");
 	const firstName = document.getElementById("first_name");
 	const lastName = document.getElementById("last_name");
+	const sub_btn = document.getElementById("sub_btn");
+	var [p1, n1, e1, f1, l1] = [false, false, false, false, false,];
 
 
 	function validatePasswords() {
@@ -59,26 +61,36 @@ addEventListener("DOMContentLoaded", (event) => {
 		password2.classList.toggle("green_glow", isValid && isEqual);
 		password2.classList.toggle("valid", isValid && isEqual);
 		password2.classList.toggle("red_glow", !isValid || !isEqual);
+		p1 = isValid && isEqual;
+		(p1 && n1 && e1 && f1 && l1) ? sub_btn.disabled = false : sub_btn.disabled = true;
 	};
 	function validateUserName() {
 		const isValid = userName.value != "" && !userName.value.includes(" ");
 		userName.classList.toggle("green_glow", isValid);
 		userName.classList.toggle("red_glow", !isValid);
+		n1 = isValid;
+		(p1 && n1 && e1 && f1 && l1) ? sub_btn.disabled = false : sub_btn.disabled = true;
 	};
 	function validateEmail() {
 		const isValid = email.value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 		email.classList.toggle("green_glow", isValid);
 		email.classList.toggle("red_glow", !isValid);
+		e1 = isValid;
+		(p1 && n1 && e1 && f1 && l1) ? sub_btn.disabled = false : sub_btn.disabled = true;
 	};
 	function validateFirstName() {
 		const isValid = firstName.value != "" && !firstName.value.includes(" ") && !/\d/.test(firstName.value) && !/[!@#$%^&*()\[\]{}\\|;:'",<.>/?`~]/.test(firstName.value);
 		firstName.classList.toggle("green_glow", isValid);
 		firstName.classList.toggle("red_glow", !isValid);
+		f1 = isValid;
+		(p1 && n1 && e1 && f1 && l1) ? sub_btn.disabled = false : sub_btn.disabled = true;
 	};
 	function validateLastName() {
 		const isValid = lastName.value != "" && !lastName.value.includes(" ") && !/\d/.test(lastName.value) && !/[!@#$%^&*()\[\]{}\\|;:'",<.>/?`~]/.test(lastName.value);
 		lastName.classList.toggle("green_glow", isValid);
 		lastName.classList.toggle("red_glow", !isValid);
+		l1 = isValid;
+		(p1 && n1 && e1 && f1 && l1) ? sub_btn.disabled = false : sub_btn.disabled = true;
 	};
 	function resetGlow() {
 		password.classList.remove("green_glow");
@@ -95,9 +107,7 @@ addEventListener("DOMContentLoaded", (event) => {
 		lastName.classList.remove("red_glow");
 	};
 
-
 	requirements.forEach((element) => element.classList.add("wrong"));
-
 
 	password.addEventListener("focus", () => {
 		validatePasswords();
@@ -136,8 +146,6 @@ addEventListener("DOMContentLoaded", (event) => {
 	lastName.addEventListener("input", () => {
 		validateLastName();
 	});
-
-
 
 	password.addEventListener("blur", () => {
 		passwordAlert.classList.add("d-none");

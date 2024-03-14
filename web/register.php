@@ -233,7 +233,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </button>
             </div>
             <div class="modal-body">
-                <p style="color: #fff;">Are You Sure You Want to Submit the Registration ?</p>
+                <p style="color: #fff;">By submitting the registration, you are agreeing to the terms and conditions of registration !</p>
+                <p style="color: #fff;">Are you sure you want to submit the registration ?</p>
+                <a href="index.php" class="small text-muted">Terms of use.</a>
+                <a href="index.php" class="small text-muted">Privacy policy</a>
             </div>
             <div class="modal-footer">
                 <button class="crit_btn halfL" data-dismiss="modal" aria-label="Close">Cancel</button>
