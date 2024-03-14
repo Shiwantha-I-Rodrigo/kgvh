@@ -1,11 +1,13 @@
 PHPMailer/
 
-system/extra
-system/fonts
 system/images
 system/css/*
 !system/css/style.css
 system/js/*
+!system/js/functions.js
+system/lib
+system/templates
+
 
 web/fonts
 web/images
