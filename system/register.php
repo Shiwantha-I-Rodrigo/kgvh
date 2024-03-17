@@ -3,82 +3,261 @@
 
 <head>
     <meta charset="utf-8">
-    <title>DarkPan - Bootstrap 5 Admin Template</title>
+    <title>KGVH Employee Registration</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
     <!-- Favicon -->
     <link href="images/favicon.ico" rel="icon">
-
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
-    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
     <!-- Libraries Stylesheet -->
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <script src="js/functions.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid position-relative d-flex p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        <!-- Spinner End -->
+
+    <?php
+    session_start();
+    include '../functions.php';
+    include '../config.php';
+    include '../mail.php';
+    ?>
+
+    <!-- Form actions -->
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        extract($_POST);
+
+        $first_name = dataClean($first_name);
+        $last_name = dataClean($last_name);
+        $address_line1 = dataClean($address_line1);
+        $address_line2 = dataClean($address_line2);
+        $address_line3 = dataClean($address_line3);
+
+        $message = array();
+
+        //Basic validation-----------------------------------------------
+        if (empty($first_name)) {
+            $message['first_name'] = "The first name should not be blank...!";
+        }
+        if (empty($last_name)) {
+            $message['last_name'] = "The last name should not be blank...!";
+        }
+
+        //Advance validation and submit-------------------------------------
+        if (ctype_alpha(str_replace(' ', '', $first_name)) === false) {
+            $message['first_name'] = "Only letters and white space allowed";
+        }
+        if (ctype_alpha(str_replace(' ', '', $last_name)) === false) {
+            $message['last_name'] = "Only letters and white space allowed";
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $message['email'] = "Invalid Email Address...!";
+        } else {
+            $db = dbConn();
+            $sql = "SELECT * FROM users WHERE Email='$email'";
+            $result = $db->query($sql);
+            if ($result->num_rows > 0) {
+                $message['email'] = "This Email address already exsist...!";
+            }
+        }
+        if (empty($user_name)) {
+            $message['user_name'] = "The user name should not be blank...!";
+        } else {
+            $db = dbConn();
+            $sql = "SELECT * FROM users WHERE UserName='$user_name'";
+            $result = $db->query($sql);
+            if ($result->num_rows > 0) {
+                $message['user_name'] = "This user name address already exsist...!";
+            }
+        }
+
+        if (empty($password)) {
+            $message['password'] = "The password should not be blank...!";
+        } elseif (strlen($password) < 8 or strlen($password) > 64) {
+            $message['password'] = "The password should be between 8 and 64 characters...!";
+        } elseif (strlen($password) < 8 or strlen($password) > 64) {
+            $message['password'] = "The password should be between 8 and 64 characters...!";
+        } elseif (strlen($password) < 8 or strlen($password) > 64) {
+            $message['password'] = "The password should be between 8 and 64 characters...!";
+        }
+
+        if (empty($message)) {
+            $pw_hash = password_hash($password, PASSWORD_BCRYPT);
+            $db = dbConn();
+            $sql = "INSERT INTO `users`(`UserName`, `Password`,`Email`) VALUES ('$user_name','$pw_hash','$email')";
+            $db->query($sql);
+
+            $user_id = $db->insert_id;
+            $reg_no = date('Y') . date('m') . $user_id;
+            $_SESSION['reg_no'] = $reg_no;
+            $_SESSION['user_name'] = $user_name;
+
+            $sql = "INSERT INTO `employees`(`FirstName`, `LastName`, `NationalIdCard`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `Telephone`, `Mobile`, `Gender`,`RegNo`,`UserId`, `EmployeeRole`, `ProfilePic`) VALUES ('$first_name','$last_name','$nic','$address_line1','$address_line2','$address_line3','$telephone','$mobile','$gender','$reg_no','$user_id','$role','images/profile.jpg')";
+            $db->query($sql);
+
+            $msg = "<h1>SUCCESS</h1>";
+            $msg .= "<h2>Congratulations</h2>";
+            $msg .= "<p>Your account has been successfully created</p>";
+            $msg .= "<a href=" . $_CUSTOMER_VERIFICATION_LINK . ">Click here to verifiy your account</a>";
+            sendEmail($email, $first_name, "Account Verification", $msg);
+            reDirect("register_success.php");
+        }
+    }
+    ?>
 
 
-        <!-- Sign Up Start -->
-        <div class="container-fluid">
-            <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
-                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                    <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <a href="index.html" class="">
-                                <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>DarkPan</h3>
-                            </a>
-                            <h3>Sign Up</h3>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingText" placeholder="jhondoe">
-                            <label for="floatingText">Username</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">Email address</label>
-                        </div>
-                        <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">Password</label>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    <div class="page_title">
+        <section class="vh-100" style="background-color: #000;">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col col-xl-8">
+                        <div class="card" style="border-radius: 1rem;background-color: #191C24; margin-bottom:40px;">
+                            <div class="row g-0">
+                                <div class="col-md-6 col-lg-12 d-flex align-items-center">
+                                    <div class="card-body p-4 p-lg-5 text-black">
+                                        <form class="main_form" id="reg_form" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" role="form" novalidate>
+
+                                            <div class="d-flex align-items-center mb-3 pb-1">
+                                                <img src="images/logo_big.png" alt="login form" class="img-fluid full" style="border-radius: 1rem 0 0 1rem;" />
+                                            </div>
+
+                                            <h1 class="full"> ⬩ Employee Registration Form ⬩</h1>
+
+                                            <label class="halfL">Username</label>
+                                            <label class="halfR">Password</label>
+                                            <span class="text-danger halfL"><?= @$message['user_name'] ?></span>
+                                            <span class="text-danger halfR"><?= @$message['password'] ?></span>
+                                            <input type="text" class="form-control inputs halfL" name="user_name" id="user_name" placeholder="Username *" required />
+                                            <input type="password" class="form-control inputs halfR" name="password" id="password" placeholder="Password *" required>
+
+
+                                            <div class="fullL">
+                                                <div class="alert px-4 py-3 mb-0 d-none password_meter" role="alert" id="password-alert">
+                                                    <ul class="list-unstyled mb-0">
+                                                        <li class="requirements leng">
+                                                            <img class="tickk" src="images/icons/tick.png" id="leng_tick" alt=">" />
+                                                            <img class="tickx" src="images/icons/x.png" id="leng_x" alt="x" />
+                                                            password must have at least 8 chars
+                                                        </li>
+                                                        <li class="requirements cap">
+                                                            <img class="tickk" src="images/icons/tick.png" id="cap_tick" alt=">" />
+                                                            <img class="tickx" src="images/icons/x.png" id="cap_x" alt="x" />
+                                                            password must have a capital letter.
+                                                        </li>
+                                                        <li class="requirements num">
+                                                            <img class="tickk" src="images/icons/tick.png" id="num_tick" alt=">" />
+                                                            <img class="tickx" src="images/icons/x.png" id="num_x" alt="x" />
+                                                            password must have a number.
+                                                        </li>
+                                                        <li class="requirements char">
+                                                            <img class="tickk" src="images/icons/tick.png" id="chr_tick" alt=">" />
+                                                            <img class="tickx" src="images/icons/x.png" id="chr_x" alt="x" />
+                                                            password must have a special character.
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+                                            <label class="halfL">NIC</label>
+                                            <label class="halfR">Confirm Password</label>
+                                            <span class="text-danger halfL"><?= @$message['nic'] ?></span>
+                                            <span class="text-danger halfR"><?= @$message['password2'] ?></span>
+                                            <input type="text" class="form-control inputs halfL" name="nic" id="nic" placeholder="National ID Card Number" maxlength="12" />
+                                            <input type="password" class="form-control inputs halfR" name="password2" id="password2" placeholder="Confirm Password *" required>
+
+                                            <label class="halfL">Email</label>
+                                            <span class="text-danger halfR"><?= @$message['email'] ?></span>
+                                            <input type="email" class="form-control inputs" name="email" id="email" placeholder="Email *" required />
+
+                                            <label class="halfL">First Name</label>
+                                            <label class="halfR">Last Name</label>
+                                            <span class="text-danger halfL"><?= @$message['first_name'] ?></span>
+                                            <span class="text-danger halfR"><?= @$message['last_name'] ?></span>
+                                            <input type="text" class="form-control inputs halfL" name="first_name" id="first_name" placeholder="First Name *" required />
+                                            <input type="text" class="form-control inputs halfR" name="last_name" id="last_name" placeholder="Last Name *" required />
+
+                                            <label class="halfL">User Role</label>
+                                            <label class="halfR">Gender</label>
+                                            <select name="role" id="role" class="form-control inputs halfL">
+                                                <option value="0">Travel Solution</option>
+                                                <option value="1">Receptionist</option>
+                                                <option value="1">Manager</option>
+                                                <option value="1">Admin</option>
+                                            </select>
+
+                                            <select name="gender" id="gender" class="form-control inputs halfR">
+                                                <option value="0">Male</option>
+                                                <option value="1">Female</option>
+                                            </select>
+
+                                            <label class="halfL">Mobile</label>
+                                            <label class="halfR">Telephone</label>
+                                            <span class="text-danger halfL"><?= @$message['mobile'] ?></span>
+                                            <span class="text-danger halfR"><?= @$message['telephone'] ?></span>
+                                            <input type="text" class="form-control inputs halfL" name="mobile" id="mobile" placeholder="Mobile No." maxlength="18" />
+                                            <input type="text" class="form-control inputs halfR" name="telephone" id="telephone" placeholder="Telephone No." maxlength="18" />
+
+                                            <label class="halfL">Address</label>
+                                            <span class="text-danger halfR"><?= @$message['address'] ?></span>
+                                            <input type="text" class="form-control inputs" name="address1" id="address1" placeholder="House/Building No." />
+                                            <input type="text" class="form-control inputs" name="address2" id="address2" placeholder="Street" />
+                                            <input type="text" class="form-control inputs" name="address3" id="address3" placeholder="Town" />
+
+                                        </form>
+                                        <button class="common_btn full" name="sub_btn" id="sub_btn" data-bs-toggle="modal" data-bs-target="#success_modal" disabled>Submit</button>
+                                        <p style="color: #fff;"> Already have an account ? <a href="login.php" style="color: #a5c5c5;"> Login here </a></p>
+                                        <p style="color: #fff; margin-top: 20px;" class="text-muted"> Required fields are indicated with a '*' mark </p>
+                                        <a href="index.php" class="small text-muted">Terms of use.</a>
+                                        <a href="index.php" class="small text-muted">Privacy policy</a>
+                                    </div>
+                                </div>
                             </div>
-                            <a href="">Forgot Password</a>
                         </div>
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
-                        <p class="text-center mb-0">Already have an Account? <a href="">Sign In</a></p>
                     </div>
                 </div>
             </div>
+        </section>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade back" id="success_modal" tabindex="-1" role="dialog" >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modals">
+                <div class="modal-header">
+                    <img src="images/logo_tiny.png" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                    <h3 class="modal-title" id="exampleModalCenterTitle" style="color: #fff; margin-left:10px;">Confirmation</h3>
+                    <button type="button" class="close crit_btn" data-bs-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p style="color: #fff;">By submitting the registration, you are agreeing to the terms and conditions of registration !</p>
+                    <p style="color: #fff;">Are you sure you want to submit the registration ?</p>
+                    <a href="index.php" class="small text-muted">Terms of use.</a>
+                    <a href="index.php" class="small text-muted">Privacy policy</a>
+                </div>
+                <div class="modal-footer">
+                    <button class="crit_btn halfL" data-bs-dismiss="modal" style="margin-right: 20px;">Cancel</button>
+                    <button class="common_btn halfR" type="submit" form="reg_form" formmethod="post">Confirm</button>
+                </div>
+            </div>
         </div>
-        <!-- Sign Up End -->
     </div>
 
     <!-- JavaScript Libraries -->
@@ -91,9 +270,8 @@
     <script src="lib/tempusdominus/js/moment.min.js"></script>
     <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
     <!-- Template Javascript -->
-    <script src="js/functions.js"></script>
+
 </body>
 
 </html>
