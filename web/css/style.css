@@ -216,9 +216,12 @@ button {
 
 .common_btn:focus,
 .common_btn:hover {
-     background-color: #a5c5c5;
-     color: #0f5256;
+     background-color: #03e245;
+     color: #ffffff;
      transition: ease-in 0.5s;
+     outline: none;
+     border-color: #03e245;
+     box-shadow: 0 0 15px #03e245;
 }
 
 .common_btn:disabled {
@@ -245,9 +248,12 @@ button {
 
 .crit_btn:focus,
 .crit_btn:hover {
-     background-color: #a5c5c5;
-     color: #0f5256;
+     background-color: #e74d46;
+     color: #ffffff;
      transition: ease-in 0.5s;
+     outline: none;
+     border-color: #e74d46;
+     box-shadow: 0 0 15px #e74d46;
 }
 
 .crit_btn:disabled {
@@ -262,7 +268,7 @@ button {
      text-align: center;
      border-radius: 8px;
      padding: 7px 15px 7px 15px;
-     margin: 0px 20px 22px 0px;
+     margin: 0px 0px 0px 0px;
      color: #ffffff;
      font-size: 16px;
      line-height: 20px;
@@ -274,9 +280,12 @@ button {
 
 .sub_btn:focus,
 .sub_btn:hover {
-     background-color: #a5c5c5;
-     color: #0f5256;
+     background-color: #0f5256;
+     color: #ffffff;
      transition: ease-in 0.5s;
+     outline: none;
+     border-color: #0f5256;
+     box-shadow: 0 0 15px #0f5256;
 }
 
 .sub_btn:disabled {
@@ -456,9 +465,12 @@ button {
 
 .header .nav-btn:focus,
 .header .nav-btn:hover {
-     background-color: #a5c5c5;
-     color: #0f5256;
+     background-color: #03e245;
+     color: #ffffff;
      transition: ease-in 0.5s;
+     outline: none;
+     border-color: #03e245;
+     box-shadow: 0 0 15px #03e245;
 }
 
 .header .nav-crt {
@@ -479,9 +491,12 @@ button {
 
 .header .nav-crt:focus,
 .header .nav-crt:hover {
-     background-color: #a5c5c5;
-     color: #e74d46;
+     background-color: #e74d46;
+     color: #ffffff;
      transition: ease-in 0.5s;
+     outline: none;
+     border-color: #e74d46;
+     box-shadow: 0 0 15px #e74d46;
 }
 
 

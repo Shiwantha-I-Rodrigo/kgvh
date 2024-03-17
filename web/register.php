@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $message['email'] = "Invalid Email Address...!";
     } else {
         $db = dbConn();
-        $sql = "SELECT * FROM customers WHERE Email='$email'";
+        $sql = "SELECT * FROM users WHERE Email='$email'";
         $result = $db->query($sql);
         if ($result->num_rows > 0) {
             $message['email'] = "This Email address already exsist...!";
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($message)) {
         $pw_hash = password_hash($password, PASSWORD_BCRYPT);
         $db = dbConn();
-        $sql = "INSERT INTO `users`(`UserName`, `Password`,`UserLevel`) VALUES ('$user_name','$pw_hash','1')";
+        $sql = "INSERT INTO `users`(`UserName`, `Password`,`Email`) VALUES ('$user_name','$pw_hash','$email')";
         $db->query($sql);
 
         $user_id = $db->insert_id;
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['reg_no'] = $reg_no;
         $_SESSION['user_name'] = $user_name;
 
-        $sql = "INSERT INTO `customers`(`FirstName`, `LastName`, `Email`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `TelNo`, `MobileNo`, `Gender`, `Nationality`,`RegNo`,`UserId`) VALUES ('$first_name','$last_name','$email','$address_line1','$address_line2','$address_line3','$telephone','$mobile','$gender','$nationality','$reg_no','$user_id')";
+        $sql = "INSERT INTO `customers`(`FirstName`, `LastName`, `NationalIdCard`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `Telephone`, `Mobile`, `Gender`,`RegNo`,`UserId`, `NationalId`, `About`, `ProfilePic`) VALUES ('$first_name','$last_name','$nic','$address_line1','$address_line2','$address_line3','$telephone','$mobile','$gender','$reg_no','$user_id','$national_id','$about','images/profile.jpg')";
         $db->query($sql);
 
         $msg = "<h1>SUCCESS</h1>";
@@ -178,11 +178,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <label class="halfL">Nationality</label>
                                         <label class="halfR">Gender</label>
 
-                                        <select name="nationality" id="nationality" class="form-control inputs halfL">
+                                        <select name="national_id" id="national_id" class="form-control inputs halfL">
                                             <?php
                                             while ($row = $result->fetch_assoc()) {
                                             ?>
-                                                <option value="<?= $row['Id'] ?>"><?= $row['Name'] ?></option>
+                                                <option value="<?= $row['NationalId'] ?>"><?= $row['NationalName'] ?></option>
                                             <?php
                                             }
                                             ?>
@@ -228,7 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="modal-header">
                 <img src="images/logo_tiny.png" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                 <h3 class="modal-title" id="exampleModalCenterTitle" style="color: #fff; margin-left:10px;">Confirmation</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close crit_btn" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
