@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+session_start();
+require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
+?>
+
 <head>
     <meta charset="utf-8">
     <title>KGVH Employee Registration</title>
@@ -8,7 +13,7 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
     <!-- Favicon -->
-    <link href="images/favicon.ico" rel="icon">
+    <link href="<?= SYSTEM_BASE_URL ?>images/favicon.ico" rel="icon">
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,23 +22,16 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="<?= SYSTEM_BASE_URL ?>lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="<?= SYSTEM_BASE_URL ?>lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= SYSTEM_BASE_URL ?>css/bootstrap.min.css" rel="stylesheet">
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <script src="js/functions.js"></script>
+    <link href="<?= SYSTEM_BASE_URL ?>css/style.css" rel="stylesheet">
+    <script src="<?= SYSTEM_BASE_URL ?>js/functions.js"></script>
 </head>
 
 <body>
-
-    <?php
-    session_start();
-    include '../functions.php';
-    include '../config.php';
-    include '../mail.php';
-    ?>
 
     <!-- Form actions -->
     <?php
@@ -109,6 +107,26 @@
             $sql = "INSERT INTO `employees`(`FirstName`, `LastName`, `NationalIdCard`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `Telephone`, `Mobile`, `Gender`,`RegNo`,`UserId`, `EmployeeRole`, `ProfilePic`) VALUES ('$first_name','$last_name','$nic','$address_line1','$address_line2','$address_line3','$telephone','$mobile','$gender','$reg_no','$user_id','$role','images/profile.jpg')";
             $db->query($sql);
 
+            $admin = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13];
+            $manager = [2, 3, 4, 5, 7, 8, 9, 10, 13];
+            $receptionist = [3, 4, 5, 7, 10, 11, 12, 13];
+            $travel = [5, 12, 13];
+
+            if ($role == 1) {
+                $modules = $admin;
+            } elseif ($role == 2) {
+                $modules = $manager;
+            } elseif ($role == 3) {
+                $modules = $receptionist;
+            } else {
+                $modules = $travel;
+            }
+
+            foreach ($modules as $module) {
+                $sql = "INSERT INTO `user_modules`(`UserId`, `ModuleId`) VALUES ('$user_id','$module')";
+                $db->query($sql);
+            }
+
             $msg = "<h1>SUCCESS</h1>";
             $msg .= "<h2>Congratulations</h2>";
             $msg .= "<p>Your account has been successfully created</p>";
@@ -132,7 +150,7 @@
                                         <form class="main_form" id="reg_form" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" role="form" novalidate>
 
                                             <div class="d-flex align-items-center mb-3 pb-1">
-                                                <img src="images/logo_big.png" alt="login form" class="img-fluid full" style="border-radius: 1rem 0 0 1rem;" />
+                                                <img src="<?= SYSTEM_BASE_URL ?>images/logo_big.png" alt="login form" class="img-fluid full" style="border-radius: 1rem 0 0 1rem;" />
                                             </div>
 
                                             <h1 class="full"> ⬩ Employee Registration Form ⬩</h1>
@@ -149,23 +167,23 @@
                                                 <div class="alert px-4 py-3 mb-0 d-none password_meter" role="alert" id="password-alert">
                                                     <ul class="list-unstyled mb-0">
                                                         <li class="requirements leng">
-                                                            <img class="tickk" src="images/icons/tick.png" id="leng_tick" alt=">" />
-                                                            <img class="tickx" src="images/icons/x.png" id="leng_x" alt="x" />
+                                                            <img class="tickk" src="<?= SYSTEM_BASE_URL ?>images/icons/tick.png" id="leng_tick" alt=">" />
+                                                            <img class="tickx" src="<?= SYSTEM_BASE_URL ?>images/icons/x.png" id="leng_x" alt="x" />
                                                             password must have at least 8 chars
                                                         </li>
                                                         <li class="requirements cap">
-                                                            <img class="tickk" src="images/icons/tick.png" id="cap_tick" alt=">" />
-                                                            <img class="tickx" src="images/icons/x.png" id="cap_x" alt="x" />
+                                                            <img class="tickk" src="<?= SYSTEM_BASE_URL ?>images/icons/tick.png" id="cap_tick" alt=">" />
+                                                            <img class="tickx" src="<?= SYSTEM_BASE_URL ?>images/icons/x.png" id="cap_x" alt="x" />
                                                             password must have a capital letter.
                                                         </li>
                                                         <li class="requirements num">
-                                                            <img class="tickk" src="images/icons/tick.png" id="num_tick" alt=">" />
-                                                            <img class="tickx" src="images/icons/x.png" id="num_x" alt="x" />
+                                                            <img class="tickk" src="<?= SYSTEM_BASE_URL ?>images/icons/tick.png" id="num_tick" alt=">" />
+                                                            <img class="tickx" src="<?= SYSTEM_BASE_URL ?>images/icons/x.png" id="num_x" alt="x" />
                                                             password must have a number.
                                                         </li>
                                                         <li class="requirements char">
-                                                            <img class="tickk" src="images/icons/tick.png" id="chr_tick" alt=">" />
-                                                            <img class="tickx" src="images/icons/x.png" id="chr_x" alt="x" />
+                                                            <img class="tickk" src="<?= SYSTEM_BASE_URL ?>images/icons/tick.png" id="chr_tick" alt=">" />
+                                                            <img class="tickx" src="<?= SYSTEM_BASE_URL ?>images/icons/x.png" id="chr_x" alt="x" />
                                                             password must have a special character.
                                                         </li>
                                                     </ul>
@@ -220,10 +238,10 @@
 
                                         </form>
                                         <button class="common_btn full" name="sub_btn" id="sub_btn" data-bs-toggle="modal" data-bs-target="#success_modal" disabled>Submit</button>
-                                        <p style="color: #fff;"> Already have an account ? <a href="login.php" style="color: #a5c5c5;"> Login here </a></p>
+                                        <p style="color: #fff;"> Already have an account ? <a href="<?= SYSTEM_BASE_URL ?>login.php" style="color: #a5c5c5;"> Login here </a></p>
                                         <p style="color: #fff; margin-top: 20px;" class="text-muted"> Required fields are indicated with a '*' mark </p>
-                                        <a href="index.php" class="small text-muted">Terms of use.</a>
-                                        <a href="index.php" class="small text-muted">Privacy policy</a>
+                                        <a href="<?= SYSTEM_BASE_URL ?>index.php" class="small text-muted">Terms of use.</a>
+                                        <a href="<?= SYSTEM_BASE_URL ?>index.php" class="small text-muted">Privacy policy</a>
                                     </div>
                                 </div>
                             </div>
@@ -236,11 +254,11 @@
 
 
     <!-- Modal -->
-    <div class="modal fade back" id="success_modal" tabindex="-1" role="dialog" >
+    <div class="modal fade back" id="success_modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modals">
                 <div class="modal-header">
-                    <img src="images/logo_tiny.png" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                    <img src="<?= SYSTEM_BASE_URL ?>images/logo_tiny.png" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                     <h3 class="modal-title" id="exampleModalCenterTitle" style="color: #fff; margin-left:10px;">Confirmation</h3>
                     <button type="button" class="close crit_btn" data-bs-dismiss="modal">
                         <span>&times;</span>
@@ -249,8 +267,8 @@
                 <div class="modal-body">
                     <p style="color: #fff;">By submitting the registration, you are agreeing to the terms and conditions of registration !</p>
                     <p style="color: #fff;">Are you sure you want to submit the registration ?</p>
-                    <a href="index.php" class="small text-muted">Terms of use.</a>
-                    <a href="index.php" class="small text-muted">Privacy policy</a>
+                    <a href="<?= SYSTEM_BASE_URL ?>index.php" class="small text-muted">Terms of use.</a>
+                    <a href="<?= SYSTEM_BASE_URL ?>index.php" class="small text-muted">Privacy policy</a>
                 </div>
                 <div class="modal-footer">
                     <button class="crit_btn halfL" data-bs-dismiss="modal" style="margin-right: 20px;">Cancel</button>
@@ -263,13 +281,13 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/chart/chart.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>lib/chart/chart.min.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>lib/easing/easing.min.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>lib/waypoints/waypoints.min.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>lib/tempusdominus/js/moment.min.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- Template Javascript -->
 
 </body>

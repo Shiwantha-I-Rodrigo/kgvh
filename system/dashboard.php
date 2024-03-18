@@ -1,9 +1,9 @@
 <?php
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
 if (!isset($_SESSION['user_id'])) {
-    header("Location:login.php");
+    reDirect(SYSTEM_BASE_URL."login.php");
 }
-include '../functions.php';
 ob_start();
 ?>
 
@@ -248,7 +248,7 @@ ob_start();
 
 <?php
 $page_content = ob_get_clean();
-$page_title = "KGVH Dashboard";
+$page_title = "Dashboard";
 
 $db = dbConn();
 
@@ -268,5 +268,5 @@ $sql = "SELECT * FROM  messages WHERE messages.UserIdTo = '$user_id'";
 $messages = $db->query($sql);
 $sql = "SELECT * FROM  notes WHERE notes.UserIdTo = " . $user_id;
 $notes = $db->query($sql);
-require_once 'layout.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/system/layout.php';
 ?>

@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+session_start();
+require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
+?>
+
 <head>
     <meta charset="utf-8">
-    <title>DarkPan - Bootstrap 5 Admin Template</title>
+    <title>KGVH Login Portal</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
     <!-- Favicon -->
-    <link href="images/favicon.ico" rel="icon">
+    <link href="<?= SYSTEM_BASE_URL ?>images/favicon.ico" rel="icon">
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,20 +23,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="<?= SYSTEM_BASE_URL ?>lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="<?= SYSTEM_BASE_URL ?>lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= SYSTEM_BASE_URL ?>css/bootstrap.min.css" rel="stylesheet">
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="<?= SYSTEM_BASE_URL ?>css/style.css" rel="stylesheet">
 </head>
 
 <body>
-
-    <?php
-    session_start();
-    include '../functions.php';
-    ?>
 
     <!-- Form actions -->
     <?php
@@ -63,7 +63,7 @@
                     if ($verify->num_rows == 1) {
                         $_SESSION['user_id'] = $user_id;
                         $_SESSION['user_name'] = $user_name;
-                        reDirect("dashboard.php");
+                        reDirect(SYSTEM_BASE_URL."dashboard.php");
                     } else {
                         $message['message'] = "Invalid User Name or Password...!";
                     }
@@ -86,13 +86,13 @@
                         <div class="card" style="border-radius: 1rem;background-color: #191C24;">
                             <div class="row g-0">
                                 <div class="col-md-6 col-lg-5 d-none d-md-block">
-                                    <img src="images/login.jpg" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                                    <img src="<?= SYSTEM_BASE_URL ?>images/login.jpg" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                                 </div>
                                 <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                     <div class="card-body p-4 p-lg-5 text-black">
                                         <form class="main_form" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" role="form" novalidate>
                                             <div class="d-flex align-items-center mb-3 pb-1">
-                                                <img src="images/logo_big.png" alt="login form" class="img-fluid full" style="border-radius: 1rem 0 0 1rem;" />
+                                                <img src="<?= SYSTEM_BASE_URL ?>images/logo_big.png" alt="login form" class="img-fluid full" style="border-radius: 1rem 0 0 1rem;" />
                                             </div>
                                             <div class="form-outline mb-4">
                                                 <input type="text" class="form-control inputs" name="user_name" id="user_name" placeholder="Username" required />
@@ -104,10 +104,10 @@
                                                 <button class="common_btn full" type="submit" formmethod="post">Login</button>
                                             </div>
                                             <a class="small" style="color: #fff;" href="index.php">Forgot password?</a>
-                                            <p class="mb-3 pb-lg-2" style="color: #fff;"> Don't have an account ? <a href="register.php" style="color: #a5c5c5;"> Register here </a></p>
+                                            <p class="mb-3 pb-lg-2" style="color: #fff;"> Don't have an account ? <a href="<?= SYSTEM_BASE_URL ?>register.php" style="color: #a5c5c5;"> Register here </a></p>
                                             <p style="padding:0 0 0 0;margin:0 0 0 0;color:#e74d46"><?= @$message['message'] ?></p>
-                                            <a href="index.php" class="small text-muted">Terms of use.</a>
-                                            <a href="index.php" class="small text-muted">Privacy policy</a>
+                                            <a href="<?= SYSTEM_BASE_URL ?>index.php" class="small text-muted">Terms of use.</a>
+                                            <a href="<?= SYSTEM_BASE_URL ?>index.php" class="small text-muted">Privacy policy</a>
                                         </form>
                                     </div>
                                 </div>
@@ -122,16 +122,15 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/chart/chart.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
+    <script src="<?= SYSTEM_BASE_URL ?>lib/chart/chart.min.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>lib/easing/easing.min.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>lib/waypoints/waypoints.min.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>lib/tempusdominus/js/moment.min.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- Template Javascript -->
-    <script src="js/functions.js"></script>
+    <script src="<?= SYSTEM_BASE_URL ?>js/functions.js"></script>
 </body>
 
 </html>
