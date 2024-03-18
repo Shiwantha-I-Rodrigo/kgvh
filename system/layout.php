@@ -12,7 +12,7 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -26,18 +26,17 @@
 </head>
 
 <body>
+
+    <!-- Spinner Start -->
+    <div class="overlay" id="loader">
+        <span class='loader' style="text-align:center;display:inline-block"></span>
+    </div>
+    <!-- Spinner End -->
+
     <div class="container-fluid position-relative d-flex p-0">
 
-        <!-- Spinner Start -->
-        <!-- <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div> -->
-        <!-- Spinner End -->
-
         <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3"  id="sidebar" name="sidebar">
+        <div class="sidebar pe-4 pb-3" id="sidebar" name="sidebar">
             <nav class="navbar bg-secondary navbar-dark">
                 <a href="dashboard.php" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>KGVH</h3>
@@ -69,7 +68,7 @@
                 <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
                 </a>
-                <a href="#" class="sidebar-toggler flex-shrink-0">
+                <a href="#" class="sidebar-toggler flex-shrink-0" id="sidebar_toggle">
                     <i class="fa fa-bars"></i>
                 </a>
                 <div class="navbar-nav align-items-center ms-auto">

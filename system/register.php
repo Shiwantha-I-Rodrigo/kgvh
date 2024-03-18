@@ -194,9 +194,9 @@
                                             <label class="halfL">User Role</label>
                                             <label class="halfR">Gender</label>
                                             <select name="role" id="role" class="form-control inputs halfL">
-                                                <option value="0">Travel Solution</option>
-                                                <option value="1">Receptionist</option>
-                                                <option value="1">Manager</option>
+                                                <option value="4">Travel Solution</option>
+                                                <option value="3">Receptionist</option>
+                                                <option value="2">Manager</option>
                                                 <option value="1">Admin</option>
                                             </select>
 
