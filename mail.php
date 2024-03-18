@@ -4,10 +4,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // Load PHPMailer classes
-require '../PHPMailer/src/Exception.php';
-require '../PHPMailer/src/PHPMailer.php';
-require '../PHPMailer/src/SMTP.php';
-require 'config.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/PHPMailer/src/Exception.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/PHPMailer/src/PHPMailer.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/PHPMailer/src/SMTP.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/config.php';
 
 // Create a new PHPMailer instance
 function sendEmail($recipient = null, $recipient_name = null, $subject = null, $message = null) {
