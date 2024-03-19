@@ -3,7 +3,7 @@
 
 <?php
 session_start();
-require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/system/init.php';
 ?>
 
 <head>
@@ -52,27 +52,27 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
 
         if (empty($message)) {
             $db = dbConn();
-            $sql = "SELECT * FROM users WHERE UserName='$user_name'";
+            $sql = "SELECT * FROM users u INNER JOIN employees e ON u.UserId = e.UserId WHERE u.UserName='$user_name' OR u.Email='$user_name'";
             $result = $db->query($sql);
             if ($result->num_rows == 1) {
                 $row = $result->fetch_assoc();
                 if (password_verify($password, $row['Password'])) {
-                    $user_id = $row['UserId'];
-                    $sql = "SELECT * FROM employees WHERE UserId='$user_id'";
-                    $verify = $db->query($sql);
-                    if ($verify->num_rows == 1) {
-                        $_SESSION['user_id'] = $user_id;
-                        $_SESSION['user_name'] = $user_name;
-                        reDirect(SYSTEM_BASE_URL."dashboard.php");
-                    } else {
-                        $message['message'] = "Invalid User Name or Password...!";
-                    }
+                    $_SESSION['user_id'] = $row['UserId'];
+                    $_SESSION['user_name'] = $row['UserName'];
+                    $_SESSION['first_name'] = $row['FirstName'];
+                    $_SESSION['last_name'] = $row['LastName'];
+                    $_SESSION['gender'] = $row['Gender'];
+                    $_SESSION['profile_pic'] = $row['ProfilePic'];
+                    $_SESSION['employee_role'] = $row['EmployeeRole'];
+                    reDirect(SYSTEM_BASE_URL . "dashboard.php");
                 } else {
                     $message['message'] = "Invalid User Name or Password...!";
                 }
             } else {
                 $message['message'] = "Invalid User Name or Password...!";
             }
+        } else {
+            $message['message'] = "Invalid User Name or Password...!";
         }
     }
     ?>
@@ -95,7 +95,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
                                                 <img src="<?= SYSTEM_BASE_URL ?>images/logo_big.png" alt="login form" class="img-fluid full" style="border-radius: 1rem 0 0 1rem;" />
                                             </div>
                                             <div class="form-outline mb-4">
-                                                <input type="text" class="form-control inputs" name="user_name" id="user_name" placeholder="Username" required />
+                                                <input type="text" class="form-control inputs" name="user_name" id="user_name" placeholder="Username or Email" required />
                                             </div>
                                             <div class="form-outline mb-4">
                                                 <input type="password" class="form-control inputs" name="password" id="password" placeholder="Password" required />

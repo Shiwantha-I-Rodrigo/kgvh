@@ -4,6 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
 if (!isset($_SESSION['user_id'])) {
     reDirect(SYSTEM_BASE_URL."login.php");
 }
+$db = dbConn();
 ob_start();
 ?>
 
@@ -249,24 +250,18 @@ ob_start();
 <?php
 $page_content = ob_get_clean();
 $page_title = "Dashboard";
-
-$db = dbConn();
-
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT * FROM employees WHERE UserId='$user_id'";
-$employee = $db->query($sql);
-if ($employee->num_rows == 1) {
-    $row = $employee->fetch_assoc();
-    $user_image = $row['ProfilePic'];
-    $user_name = $row['FirstName'];
-    $row['EmployeeRole']==1 ? $user_role = "Admin" : ($row['EmployeeRole']==2 ? $user_role = "Manager" : ($row['EmployeeRole']==3 ? $user_role = "Receptionist" : $user_role = "Travel Solution"));
-    $role_image = "images/".$row['EmployeeRole'].".jpg";
-}
-$sql = "SELECT * FROM modules INNER JOIN user_modules ON modules.ModuleId = user_modules.ModuleId WHERE user_modules.UserId = " . $user_id;
+$user_image = $_SESSION['profile_pic'];
+$first_name = $_SESSION['first_name'];
+$_SESSION['employee_role']==1 ? $user_role = "Admin" : ($_SESSION['employee_role']==2 ? $user_role = "Manager" : ($_SESSION['employee_role'] ? $user_role = "Receptionist" : $user_role = "Travel Solution"));
+$role_image = "images/".$_SESSION['employee_role'].".jpg";
+
+$sql = "SELECT * FROM modules m INNER JOIN user_modules um ON m.ModuleId = um.ModuleId WHERE um.UserId = " . $user_id;
 $modules = $db->query($sql);
 $sql = "SELECT * FROM  messages WHERE messages.UserIdTo = '$user_id'";
 $messages = $db->query($sql);
 $sql = "SELECT * FROM  notes WHERE notes.UserIdTo = " . $user_id;
 $notes = $db->query($sql);
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/system/layout.php';
 ?>

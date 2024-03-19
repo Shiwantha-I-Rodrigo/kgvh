@@ -121,7 +121,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="<?= SYSTEM_BASE_URL ?><?= $user_image ?>" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex"><?= $user_name ?></span>
+                            <span class="d-none d-lg-inline-flex"><?= $first_name ?></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="<?= SYSTEM_BASE_URL ?>profile.php" class="dropdown-item">Profile</a>
