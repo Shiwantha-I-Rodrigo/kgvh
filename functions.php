@@ -22,6 +22,7 @@ function dataClean($data = null)
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
+    $data = preg_replace("/[^a-zA-Z0-9_-]/", "", $data);
 
     return $data;
 }
@@ -31,6 +32,22 @@ function dataClean($data = null)
 function reDirect($data = null)
 {
     echo '<script type="text/javascript">window.location = "'.$data.'";</script>';
+}
+
+
+//Redirect---------------------------------------------
+function role($data = null)
+{
+    $data==1 ? $user_role = "Admin" : ($data==2 ? $user_role = "Manager" : ($data==3 ? $user_role = "Receptionist" : $user_role = "Travel Solution"));
+    return $user_role;
+}
+
+
+//Redirect---------------------------------------------
+function title($data = null)
+{
+    $data==0 ? $user_title = "Mr" : ($data==1 ? $user_title = "Mrs" : ($data==2 ? $user_title = "Miss" : ($data==3 ? $user_title = "Hon" : $user_title = "Ven")));
+    return $user_title;
 }
 
 ?>
