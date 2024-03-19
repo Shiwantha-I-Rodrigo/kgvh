@@ -3,7 +3,8 @@ session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/system/init.php';
 if (!isset($_SESSION['user_id'])) {
     reDirect(SYSTEM_BASE_URL . "login.php");
-};
+}
+$db = dbConn();
 ob_start();
 ?>
 
@@ -12,48 +13,46 @@ ob_start();
     <div class="row g-4">
         <div class="col-12">
             <div class="bg-secondary rounded h-100 p-4">
-                <h6 class="mb-4">Responsive Table</h6>
+                <h6 class="mb-4">Employee Table</h6>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Country</th>
-                                <th scope="col">ZIP</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">NIC</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Contacts</th>
+                                <th scope="col">Reg No.</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
+
+                            <?php
+                            $user_role = $_SESSION['user_role'];
+                            $sql = "SELECT * FROM  employees e WHERE e.EmployeeRole >= '$user_role'";
+                            $employees = $db->query($sql);
+                            while ($row = $employees->fetch_assoc()) { 
+                            ?>
+
                             <tr>
-                                <th scope="row">1</th>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>jhon@email.com</td>
-                                <td>USA</td>
-                                <td>123</td>
-                                <td>Member</td>
+                                <th scope="row"><?= $row['EmployeeId'] ?></th>
+                                <td><?= title($row['Title']); ?>&nbsp<?= $row['FirstName'] ?>&nbsp<?= $row['LastName'] ?></td>
+                                <td><?= $row['NationalIdCard'] ?></td>
+                                <td><?= $row['AddressLine1'] ?><br><?= $row['AddressLine2'] ?><br><?= $row['AddressLine3'] ?></td>
+                                <td><?= $row['Telephone'] ?><br><?= $row['Mobile'] ?></td>
+                                <td><?= $row['RegNo'] ?></td>
+                                <td><?= role($row['EmployeeRole']); ?></td>
+                                <td>
+                                    <button class="crit_btn"><i class="fas fa-edit"></i></button>
+                                    <button class="common_btn ms-2"><i class="fa fa-trash"></i></button>
+                                </td>
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mark@email.com</td>
-                                <td>UK</td>
-                                <td>456</td>
-                                <td>Member</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>jacob@email.com</td>
-                                <td>AU</td>
-                                <td>789</td>
-                                <td>Member</td>
-                            </tr>
+
+                            <?php }?>
+
                         </tbody>
                     </table>
                 </div>
@@ -65,25 +64,19 @@ ob_start();
 
 <?php
 $page_content = ob_get_clean();
-$page_title = "Dashboard";
-
-$db = dbConn();
-
+$page_title = "Employees";
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT * FROM employees WHERE UserId='$user_id'";
-$employee = $db->query($sql);
-if ($employee->num_rows == 1) {
-    $row = $employee->fetch_assoc();
-    $user_image = $row['ProfilePic'];
-    $user_name = $row['FirstName'];
-    $row['EmployeeRole'] == 1 ? $user_role = "Admin" : ($row['EmployeeRole'] == 2 ? $user_role = "Manager" : ($row['EmployeeRole'] == 3 ? $user_role = "Receptionist" : $user_role = "Travel Solution"));
-    $role_image = "images/" . $row['EmployeeRole'] . ".jpg";
-}
-$sql = "SELECT * FROM modules INNER JOIN user_modules ON modules.ModuleId = user_modules.ModuleId WHERE user_modules.UserId = " . $user_id;
+$user_image = $_SESSION['profile_pic'];
+$first_name = $_SESSION['first_name'];
+$_SESSION['employee_role'] == 1 ? $user_role = "Admin" : ($_SESSION['employee_role'] == 2 ? $user_role = "Manager" : ($_SESSION['employee_role'] ? $user_role = "Receptionist" : $user_role = "Travel Solution"));
+$role_image = "images/" . $_SESSION['employee_role'] . ".jpg";
+
+$sql = "SELECT * FROM modules m INNER JOIN user_modules um ON m.ModuleId = um.ModuleId WHERE um.UserId = " . $user_id;
 $modules = $db->query($sql);
 $sql = "SELECT * FROM  messages WHERE messages.UserIdTo = '$user_id'";
 $messages = $db->query($sql);
 $sql = "SELECT * FROM  notes WHERE notes.UserIdTo = " . $user_id;
 $notes = $db->query($sql);
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/system/layout.php';
 ?>

@@ -41,9 +41,9 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
 
         $first_name = dataClean($first_name);
         $last_name = dataClean($last_name);
-        $address_line1 = dataClean($address_line1);
-        $address_line2 = dataClean($address_line2);
-        $address_line3 = dataClean($address_line3);
+        $address1 = dataClean($address1);
+        $address2 = dataClean($address2);
+        $address3 = dataClean($address3);
 
         $message = array();
 
@@ -104,13 +104,13 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
             $_SESSION['reg_no'] = $reg_no;
             $_SESSION['user_name'] = $user_name;
 
-            $sql = "INSERT INTO `employees`(`FirstName`, `LastName`, `NationalIdCard`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `Telephone`, `Mobile`, `Gender`,`RegNo`,`UserId`, `EmployeeRole`, `ProfilePic`) VALUES ('$first_name','$last_name','$nic','$address_line1','$address_line2','$address_line3','$telephone','$mobile','$gender','$reg_no','$user_id','$role','images/profile.jpg')";
+            $sql = "INSERT INTO `employees`(`FirstName`, `LastName`, `NationalIdCard`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `Telephone`, `Mobile`, `Title`,`RegNo`,`UserId`, `EmployeeRole`, `ProfilePic`) VALUES ('$first_name','$last_name','$nic','$address1','$address2','$address3','$telephone','$mobile','$title','$reg_no','$user_id','$role','images/profile.jpg')";
             $db->query($sql);
 
-            $admin = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13];
-            $manager = [2, 3, 4, 5, 7, 8, 9, 10, 13];
-            $receptionist = [3, 4, 5, 7, 10, 11, 12, 13];
-            $travel = [5, 12, 13];
+            $admin = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+            $manager = [1, 3, 4, 5, 6, 7, 8, 9, 12];
+            $receptionist = [1, 4, 6, 7, 10, 11, 12];
+            $travel = [1, 6, 11, 12];
 
             if ($role == 1) {
                 $modules = $admin;
@@ -210,7 +210,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
                                             <input type="text" class="form-control inputs halfR" name="last_name" id="last_name" placeholder="Last Name *" required />
 
                                             <label class="halfL">User Role</label>
-                                            <label class="halfR">Gender</label>
+                                            <label class="halfR">Title</label>
                                             <select name="role" id="role" class="form-control inputs halfL">
                                                 <option value="4">Travel Solution</option>
                                                 <option value="3">Receptionist</option>
@@ -218,9 +218,12 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
                                                 <option value="1">Admin</option>
                                             </select>
 
-                                            <select name="gender" id="gender" class="form-control inputs halfR">
-                                                <option value="0">Male</option>
-                                                <option value="1">Female</option>
+                                            <select name="title" id="title" class="form-control inputs halfR">
+                                                <option value="0">Mr</option>
+                                                <option value="1">Mrs</option>
+                                                <option value="2">Miss</option>
+                                                <option value="3">Ven</option>
+                                                <option value="4">Hon</option>
                                             </select>
 
                                             <label class="halfL">Mobile</label>

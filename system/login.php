@@ -61,7 +61,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/system/init.php';
                     $_SESSION['user_name'] = $row['UserName'];
                     $_SESSION['first_name'] = $row['FirstName'];
                     $_SESSION['last_name'] = $row['LastName'];
-                    $_SESSION['gender'] = $row['Gender'];
+                    $_SESSION['title'] = $row['Title'];
                     $_SESSION['profile_pic'] = $row['ProfilePic'];
                     $_SESSION['employee_role'] = $row['EmployeeRole'];
                     reDirect(SYSTEM_BASE_URL . "dashboard.php");

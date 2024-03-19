@@ -253,7 +253,7 @@ $page_title = "Dashboard";
 $user_id = $_SESSION['user_id'];
 $user_image = $_SESSION['profile_pic'];
 $first_name = $_SESSION['first_name'];
-$_SESSION['employee_role']==1 ? $user_role = "Admin" : ($_SESSION['employee_role']==2 ? $user_role = "Manager" : ($_SESSION['employee_role'] ? $user_role = "Receptionist" : $user_role = "Travel Solution"));
+$_SESSION['employee_role']==1 ? $user_role = "Admin" : ($_SESSION['employee_role']==2 ? $user_role = "Manager" : ($_SESSION['employee_role']==3 ? $user_role = "Receptionist" : $user_role = "Travel Solution"));
 $role_image = "images/".$_SESSION['employee_role'].".jpg";
 
 $sql = "SELECT * FROM modules m INNER JOIN user_modules um ON m.ModuleId = um.ModuleId WHERE um.UserId = " . $user_id;
