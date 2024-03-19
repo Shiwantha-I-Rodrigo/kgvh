@@ -15,9 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $first_name = dataClean($first_name);
     $last_name = dataClean($last_name);
-    $address_line1 = dataClean($address_line1);
-    $address_line2 = dataClean($address_line2);
-    $address_line3 = dataClean($address_line3);
+    $address1 = dataClean($address1);
+    $address2 = dataClean($address2);
+    $address3 = dataClean($address3);
+    $about = dataClean($about);
 
     $message = array();
 
@@ -78,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['reg_no'] = $reg_no;
         $_SESSION['user_name'] = $user_name;
 
-        $sql = "INSERT INTO `customers`(`FirstName`, `LastName`, `NationalIdCard`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `Telephone`, `Mobile`, `Gender`,`RegNo`,`UserId`, `NationalId`, `About`, `ProfilePic`) VALUES ('$first_name','$last_name','$nic','$address_line1','$address_line2','$address_line3','$telephone','$mobile','$gender','$reg_no','$user_id','$national_id','$about','images/profile.jpg')";
+        $sql = "INSERT INTO `customers`(`FirstName`, `LastName`, `NationalIdCard`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `Telephone`, `Mobile`, `Title`,`RegNo`,`UserId`, `NationalId`, `About`, `ProfilePic`) VALUES ('$first_name','$last_name','$nic','$address1','$address2','$address3','$telephone','$mobile','$title','$reg_no','$user_id','$national_id','$about','images/profile.jpg')";
         $db->query($sql);
 
         $msg = "<h1>SUCCESS</h1>";
@@ -176,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         ?>
 
                                         <label class="halfL">Nationality</label>
-                                        <label class="halfR">Gender</label>
+                                        <label class="halfR">Title</label>
 
                                         <select name="national_id" id="national_id" class="form-control inputs halfL">
                                             <?php
@@ -188,10 +189,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             ?>
                                         </select>
 
-                                        <select name="gender" id="gender" class="form-control inputs halfR">
-                                            <option value="0">Male</option>
-                                            <option value="1">Female</option>
-                                        </select>
+                                        <select name="title" id="title" class="form-control inputs halfR">
+                                                <option value="0">Mr</option>
+                                                <option value="1">Mrs</option>
+                                                <option value="2">Miss</option>
+                                                <option value="3">Ven</option>
+                                                <option value="4">Hon</option>
+                                            </select>
 
                                         <label class="halfL">Mobile</label>
                                         <label class="halfR">Telephone</label>
