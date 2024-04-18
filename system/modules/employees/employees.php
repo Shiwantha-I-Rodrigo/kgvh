@@ -4,7 +4,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/system/init.php';
 if (!isset($_SESSION['user_id'])) {
     reDirect(SYSTEM_BASE_URL . "login.php");
 }
+$user_id = $_SESSION['user_id'];
 $db = dbConn();
+$sql = "SELECT * FROM user_modules WHERE UserId='$user_id' AND ModuleId ='5'";
+$result = $db->query($sql);
+if ($result->num_rows < 1) {
+    reDirect(SYSTEM_BASE_URL . "401.php");
+};
 ob_start();
 ?>
 
@@ -34,24 +40,24 @@ ob_start();
                             $user_role = $_SESSION['user_role'];
                             $sql = "SELECT * FROM  employees e WHERE e.EmployeeRole >= '$user_role'";
                             $employees = $db->query($sql);
-                            while ($row = $employees->fetch_assoc()) { 
+                            while ($row = $employees->fetch_assoc()) {
                             ?>
 
-                            <tr>
-                                <th scope="row"><?= $row['EmployeeId'] ?></th>
-                                <td><?= title($row['Title']); ?>&nbsp<?= $row['FirstName'] ?>&nbsp<?= $row['LastName'] ?></td>
-                                <td><?= $row['NationalIdCard'] ?></td>
-                                <td><?= $row['AddressLine1'] ?><br><?= $row['AddressLine2'] ?><br><?= $row['AddressLine3'] ?></td>
-                                <td><?= $row['Telephone'] ?><br><?= $row['Mobile'] ?></td>
-                                <td><?= $row['RegNo'] ?></td>
-                                <td><?= role($row['EmployeeRole']); ?></td>
-                                <td>
-                                    <button class="crit_btn"><i class="fas fa-edit"></i></button>
-                                    <button class="common_btn ms-2"><i class="fa fa-trash"></i></button>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <th scope="row"><?= $row['EmployeeId'] ?></th>
+                                    <td><?= title($row['Title']); ?>&nbsp<?= $row['FirstName'] ?>&nbsp<?= $row['LastName'] ?></td>
+                                    <td><?= $row['NationalIdCard'] ?></td>
+                                    <td><?= $row['AddressLine1'] ?><br><?= $row['AddressLine2'] ?><br><?= $row['AddressLine3'] ?></td>
+                                    <td><?= $row['Telephone'] ?><br><?= $row['Mobile'] ?></td>
+                                    <td><?= $row['RegNo'] ?></td>
+                                    <td><?= role($row['EmployeeRole']); ?></td>
+                                    <td>
+                                        <button class="crit_btn"><i class="fas fa-edit"></i></button>
+                                        <button class="common_btn ms-2"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                </tr>
 
-                            <?php }?>
+                            <?php } ?>
 
                         </tbody>
                     </table>
@@ -65,7 +71,6 @@ ob_start();
 <?php
 $page_content = ob_get_clean();
 $page_title = "Employees";
-$user_id = $_SESSION['user_id'];
 $user_image = $_SESSION['profile_pic'];
 $first_name = $_SESSION['first_name'];
 $_SESSION['employee_role'] == 1 ? $user_role = "Admin" : ($_SESSION['employee_role'] == 2 ? $user_role = "Manager" : ($_SESSION['employee_role'] ? $user_role = "Receptionist" : $user_role = "Travel Solution"));
