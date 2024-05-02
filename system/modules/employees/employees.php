@@ -5,12 +5,8 @@ if (!isset($_SESSION['user_id'])) {
     reDirect(SYSTEM_BASE_URL . "login.php");
 }
 $user_id = $_SESSION['user_id'];
+unauthorize($user_id, '5');
 $db = dbConn();
-$sql = "SELECT * FROM user_modules WHERE UserId='$user_id' AND ModuleId ='5'";
-$result = $db->query($sql);
-if ($result->num_rows < 1) {
-    reDirect(SYSTEM_BASE_URL . "401.php");
-};
 ob_start();
 ?>
 
@@ -21,6 +17,7 @@ ob_start();
             <div class="bg-secondary rounded h-100 p-4">
                 <h6 class="mb-4">Employee Table</h6>
                 <div class="table-responsive">
+                <a href="employees_form.php"><button class="crit_btn"><i class="fas fa-plus"></i></button></a>
                     <table class="table">
                         <thead>
                             <tr>
@@ -38,7 +35,7 @@ ob_start();
 
                             <?php
                             $user_role = $_SESSION['user_role'];
-                            $sql = "SELECT * FROM  employees e WHERE e.EmployeeRole >= '$user_role'";
+                            $sql = "SELECT * FROM  employees e INNER JOIN users u ON e.UserId=u.UserId;";
                             $employees = $db->query($sql);
                             while ($row = $employees->fetch_assoc()) {
                             ?>
@@ -50,10 +47,10 @@ ob_start();
                                     <td><?= $row['AddressLine1'] ?><br><?= $row['AddressLine2'] ?><br><?= $row['AddressLine3'] ?></td>
                                     <td><?= $row['Telephone'] ?><br><?= $row['Mobile'] ?></td>
                                     <td><?= $row['RegNo'] ?></td>
-                                    <td><?= role($row['EmployeeRole']); ?></td>
+                                    <td><?= role($row['Role']); ?></td>
                                     <td>
-                                        <button class="crit_btn"><i class="fas fa-edit"></i></button>
-                                        <button class="common_btn ms-2"><i class="fa fa-trash"></i></button>
+                                        <a href="employees_form.php?id=<?= $row['UserId'] ?>"><button class="crit_btn"><i class="fas fa-edit"></i></button></a>
+                                        <a href="employees_delete.php?id=<?= $row['UserId'] ?>"><button class="common_btn ms-2"><i class="fa fa-trash"></i></button></a>
                                     </td>
                                 </tr>
 

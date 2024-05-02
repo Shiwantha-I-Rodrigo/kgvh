@@ -25,12 +25,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/system/header.php';
                         <img src="<?= SYSTEM_BASE_URL ?>images/logo_big.png" alt="login form" class="img-fluid full" style="border-radius: 1rem 0 0 1rem;" />
                       </div>
 
-                      <h2 class="text-center" style="color: #fff;">Hello ⬩ <?php echo $_SESSION['user_name']; ?> ⬩ </h2>
-                      <h3 class="text-center" style="color: #fff;">Your account has been successfully created and a confirmation email has been sent to the provided email address.</h3>
-                      <h3 class="text-center" style="color: #fff;">Your Registration Number is <strong><?php echo $_SESSION['reg_no']; ?></strong></h3>
-                      <h3 class="text-center" style="color: #fff;">Thank You.</h3>
-
-                      <h4 class="text-center text-muted" style="color: #fff;"> Already confirmed account ? <a href="<?= SYSTEM_BASE_URL ?>login.php" style="color: #69ba6b;"> Login </a></h4>
+                      <h2 class="text-center" style="color: #fff;"> ⬩ <?php echo $_SESSION['user_name']; ?> ⬩ </h2>
+                      <h3 class="text-center" style="color: #fff;">The Record has been successfully <?php echo $_SESSION['operation']; ?>!.</h3>
                     </form>
                   </div>
                 </div>

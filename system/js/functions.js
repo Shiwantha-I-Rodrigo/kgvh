@@ -54,6 +54,11 @@ addEventListener("DOMContentLoaded", (event) => {
 		const telephone = document.getElementById("telephone");
 		var [i1, a1, a2, a3, m1, t1] = [true, true, true, true, true, true];
 
+		const update_stat = document.getElementById("update_stat");
+		const u1 = update_stat.value == "1";
+		const pwd_btn = document.getElementById("pwd_btn");
+		const pwd_row = document.getElementById("pwd_row");
+
 		function validatePasswords() {
 			const value = password.value;
 			const hasLength = value.length >= 8;
@@ -76,7 +81,7 @@ addEventListener("DOMContentLoaded", (event) => {
 			password2.classList.toggle("green_glow", isValid && isEqual);
 			password2.classList.toggle("valid", isValid && isEqual);
 			password2.classList.toggle("red_glow", !isValid || !isEqual);
-			p1 = isValid && isEqual;
+			p1 = (isValid && isEqual) || u1;
 			sub_enable();
 		};
 		function validateUserName() {
@@ -160,21 +165,27 @@ addEventListener("DOMContentLoaded", (event) => {
 		requirements.forEach((element) => element.classList.add("wrong"));
 
 		password.addEventListener("focus", () => {
+			u1 ? n1 = e1 = f1 = l1 = true : null;
 			validatePasswords();
 		});
 		password2.addEventListener("focus", () => {
+			u1 ? n1 = e1 = f1 = l1 = true : null;
 			validatePasswords();
 		});
 		userName.addEventListener("focus", () => {
+			u1 ? p1 = e1 = f1 = l1 = true : null;
 			validateUserName();
 		});
 		email.addEventListener("focus", () => {
+			u1 ? p1 = n1 = f1 = l1 = true : null;
 			validateEmail();
 		});
 		firstName.addEventListener("focus", () => {
+			u1 ? p1 = n1 = e1 = l1 = true : null;
 			validateFirstName();
 		});
 		lastName.addEventListener("focus", () => {
+			u1 ? p1 = n1 = e1 = f1 = true : null;
 			validateLastName();
 		});
 		nic.addEventListener("focus", () => {
@@ -197,21 +208,27 @@ addEventListener("DOMContentLoaded", (event) => {
 		});
 
 		password.addEventListener("input", () => {
+			u1 ? n1 = e1 = f1 = l1 = true : null;
 			validatePasswords();
 		});
 		password2.addEventListener("input", () => {
+			u1 ? n1 = e1 = f1 = l1 = true : null;
 			validatePasswords();
 		});
 		userName.addEventListener("input", () => {
+			u1 ? p1 = e1 = f1 = l1 = true : null;
 			validateUserName();
 		});
 		email.addEventListener("input", () => {
+			u1 ? p1 = n1 = f1 = l1 = true : null;
 			validateEmail();
 		});
 		firstName.addEventListener("input", () => {
+			u1 ? p1 = n1 = e1 = l1 = true : null;
 			validateFirstName();
 		});
 		lastName.addEventListener("input", () => {
+			u1 ? p1 = n1 = e1 = f1 = true : null;
 			validateLastName();
 		});
 		nic.addEventListener("input", () => {
@@ -246,6 +263,12 @@ addEventListener("DOMContentLoaded", (event) => {
 			item.addEventListener("blur", event => {
 				resetGlow();
 			})
+		});
+
+		pwd_btn.addEventListener("click", () => {
+			pwd_row.classList.toggle("d-none");
+			let txt = pwd_btn.innerHTML;
+			pwd_btn.innerHTML = txt == 'Change Password' ? 'Dont Change Password' : 'Change Password';
 		});
 
 	};

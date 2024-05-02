@@ -62,24 +62,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $message['password'] = "The password should not be blank...!";
     } elseif (strlen($password) < 8 or strlen($password) > 64) {
         $message['password'] = "The password should be between 8 and 64 characters...!";
-    }elseif (strlen($password) < 8 or strlen($password) > 64) {
+    } elseif (strlen($password) < 8 or strlen($password) > 64) {
         $message['password'] = "The password should be between 8 and 64 characters...!";
-    }elseif (strlen($password) < 8 or strlen($password) > 64) {
+    } elseif (strlen($password) < 8 or strlen($password) > 64) {
         $message['password'] = "The password should be between 8 and 64 characters...!";
     }
 
     if (empty($message)) {
         $pw_hash = password_hash($password, PASSWORD_BCRYPT);
         $db = dbConn();
-        $sql = "INSERT INTO `users`(`UserName`, `Password`,`Email`) VALUES ('$user_name','$pw_hash','$email')";
+        $sql = "INSERT INTO `users`(`UserName`, `Password`,`Email`,`Role`,`Status`) VALUES ('$user_name','$pw_hash','$email',5,1)";
         $db->query($sql);
 
         $user_id = $db->insert_id;
         $reg_no = date('Y') . date('m') . $user_id;
+        $promoint = (int)$promo;
         $_SESSION['reg_no'] = $reg_no;
         $_SESSION['user_name'] = $user_name;
 
-        $sql = "INSERT INTO `customers`(`FirstName`, `LastName`, `NationalIdCard`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `Telephone`, `Mobile`, `Title`,`RegNo`,`UserId`, `NationalId`, `About`, `ProfilePic`) VALUES ('$first_name','$last_name','$nic','$address1','$address2','$address3','$telephone','$mobile','$title','$reg_no','$user_id','$national_id','$about','images/profile.jpg')";
+        $sql = "INSERT INTO `customers`(`FirstName`, `LastName`, `NationalIdCard`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `Telephone`, `Mobile`, `Title`,`RegNo`, `ProfilePic`, `UserId`, `NationalId`, `Promo`) VALUES ('$first_name','$last_name','$nic','$address1','$address2','$address3','$telephone','$mobile','$title','$reg_no','images/profile.jpg','$user_id','$national_id',$promoint)";
         $db->query($sql);
 
         $msg = "<h1>SUCCESS</h1>";
@@ -150,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <label class="halfR">Confirm Password</label>
                                         <span class="text-danger halfL"><?= @$message['nic'] ?></span>
                                         <span class="text-danger halfR"><?= @$message['password2'] ?></span>
-                                        <input type="text" class="form-control inputs halfL" name="nic" id="nic" placeholder="National ID Card Number" maxlength="12"/>
+                                        <input type="text" class="form-control inputs halfL" name="nic" id="nic" placeholder="National ID Card Number" maxlength="12" />
                                         <input type="password" class="form-control inputs halfR" name="password2" id="password2" placeholder="Confirm Password *" required>
 
                                         <label class="halfL">Email</label>
@@ -190,30 +191,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         </select>
 
                                         <select name="title" id="title" class="form-control inputs halfR">
-                                                <option value="0">Mr</option>
-                                                <option value="1">Mrs</option>
-                                                <option value="2">Miss</option>
-                                                <option value="3">Ven</option>
-                                                <option value="4">Hon</option>
-                                            </select>
+                                            <option value="0">Mr</option>
+                                            <option value="1">Mrs</option>
+                                            <option value="2">Miss</option>
+                                            <option value="3">Ven</option>
+                                            <option value="4">Hon</option>
+                                        </select>
 
                                         <label class="halfL">Mobile</label>
                                         <label class="halfR">Telephone</label>
                                         <span class="text-danger halfL"><?= @$message['mobile'] ?></span>
                                         <span class="text-danger halfR"><?= @$message['telephone'] ?></span>
-                                        <input type="text" class="form-control inputs halfL" name="mobile" id="mobile" placeholder="Mobile No." maxlength="18"/>
-                                        <input type="text" class="form-control inputs halfR" name="telephone" id="telephone" placeholder="Telephone No." maxlength="18"/>
+                                        <input type="text" class="form-control inputs halfL" name="mobile" id="mobile" placeholder="Mobile No." maxlength="18" />
+                                        <input type="text" class="form-control inputs halfR" name="telephone" id="telephone" placeholder="Telephone No." maxlength="18" />
 
-                                        <label class="halfL">About You</label>
-                                        <span class="text-danger halfR"><?= @$message['about'] ?></span>
-                                        <input type="text" class="form-control inputs" name="about" id="about" placeholder="Something About You " maxlength="128"/>
+                                        <div class="fullL col-12 align-self-center">
+                                            <div class="form-check form-check">
+                                                <input class="form-check-input" type="checkbox" id="promo" value="1" checked>
+                                                <label class="form-check-label" for="promo">Include promotional offer notifications</label>
+                                            </div>
+                                        </div>
 
                                     </form>
                                     <button class="common_btn full" name="sub_btn" id="sub_btn" data-toggle="modal" data-target="#success_modal" disabled>Submit</button>
-                                    <p style="color: #fff;"> Already have an account ? <a href="login.php" style="color: #a5c5c5;"> Login here </a></p>
-                                    <p style="color: #fff; margin-top: 20px;" class="text-muted"> Required fields are indicated with a '*' mark </p>
-                                    <a href="index.php" class="small text-muted">Terms of use.</a>
-                                    <a href="index.php" class="small text-muted">Privacy policy</a>
+                                    <p class="fullL" style="color: #fff;"> Already have an account ? <a href="login.php" style="color: #a5c5c5;"> Login here </a></p>
+                                    <p class="fullL" style="color: #fff; margin-top: 20px;" class="text-muted"> Required fields are indicated with a '*' mark </p>
+                                    <a class="fullL" href="index.php" class="small text-muted">Terms of use.</a>
+                                    <a class="fullL" href="index.php" class="small text-muted">Privacy policy</a>
                                 </div>
                             </div>
                         </div>

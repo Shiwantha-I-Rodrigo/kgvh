@@ -2,32 +2,9 @@
 <html lang="en">
 
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/system/init.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/system/header.php';
 ?>
-
-<head>
-    <meta charset="utf-8">
-    <title><?= $page_title ?></title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-    <!-- Favicon -->
-    <link href="<?= SYSTEM_BASE_URL ?>images/favicon.ico" rel="icon">
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- Libraries Stylesheet -->
-    <link href="<?= SYSTEM_BASE_URL ?>lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="<?= SYSTEM_BASE_URL ?>lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="<?= SYSTEM_BASE_URL ?>css/bootstrap.min.css" rel="stylesheet">
-    <!-- Template Stylesheet -->
-    <link href="<?= SYSTEM_BASE_URL ?>css/style.css" rel="stylesheet">
-</head>
 
 <body>
 
@@ -43,7 +20,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
         <div class="sidebar pe-4 pb-3" id="sidebar" name="sidebar">
             <nav class="navbar bg-secondary navbar-dark">
                 <a href="dashboard.php" class="navbar-brand mx-4 mb-3">
-                    <img src="<?= SYSTEM_BASE_URL ?>images/logo_red.png" alt="logo"/>
+                    <img src="<?= SYSTEM_BASE_URL ?>images/logo_red.png" alt="logo" />
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -158,18 +135,10 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/system/init.php';
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= SYSTEM_BASE_URL ?>lib/chart/chart.min.js"></script>
-    <script src="<?= SYSTEM_BASE_URL ?>lib/easing/easing.min.js"></script>
-    <script src="<?= SYSTEM_BASE_URL ?>lib/waypoints/waypoints.min.js"></script>
-    <script src="<?= SYSTEM_BASE_URL ?>lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="<?= SYSTEM_BASE_URL ?>lib/tempusdominus/js/moment.min.js"></script>
-    <script src="<?= SYSTEM_BASE_URL ?>lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="<?= SYSTEM_BASE_URL ?>lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Template Javascript -->
-    <script src="<?= SYSTEM_BASE_URL ?>js/functions.js"></script>
+    <?php
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/system/footer.php';
+    ?>
+
 </body>
 
 </html>
