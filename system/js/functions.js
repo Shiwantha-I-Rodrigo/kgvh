@@ -27,7 +27,7 @@ addEventListener("DOMContentLoaded", (event) => {
 
 	const loader = document.getElementById("loader");
 	if (typeof (loader) != 'undefined' && loader != null) {
-		setTimeout(() => loader.hidden = true, 5000);
+		setTimeout(() => loader.hidden = true, 1000);
 	}
 
 	const passwordAlert = document.getElementById("password-alert");

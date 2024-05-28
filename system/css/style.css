@@ -589,6 +589,19 @@ button {
     height: 150px;
 }
 
+.main_form .list_btn {
+    border: #191C24 solid 1px;
+    border-radius: 10px;
+    padding: 0 15px;
+    width: 100%;
+    height: 38px;
+    background: #00000091;
+    color: #6a60f5;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: start;
+}
+
 .main_form .inputs:focus {
     outline: none;
     border-color: #9ecaed;

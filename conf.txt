@@ -1,0 +1,50 @@
+<!-- sudo mariadb -u root -p -->
+
+<!-- CREATE TABLE nationals (NationalId INT(11) PRIMARY KEY  NOT NULL AUTO_INCREMENT,NationalName VARCHAR(255) NOT NULL); -->
+<!-- insert into nationals (NationalName) values("Sri Lankan"); -->
+
+<!-- CREATE TABLE users (UserId INT(11) PRIMARY KEY  NOT NULL AUTO_INCREMENT,UserName VARCHAR(255) NOT NULL,Password VARCHAR(255) NOT NULL,Email VARCHAR(255) NOT NULL,Role INT(1) NOT NULL,Status INT(1) NOT NULL); -->
+<!-- CREATE TABLE customers (CustomerId INT(11) PRIMARY KEY  NOT NULL AUTO_INCREMENT, FirstName VARCHAR(255) NOT NULL, LastName VARCHAR(255) NOT NULL, NationalIdCard VARCHAR(255), AddressLine1 VARCHAR(255), AddressLine2 VARCHAR(255), AddressLine3 VARCHAR(255), Telephone VARCHAR(255), Mobile VARCHAR(255), Title VARCHAR(255), RegNo VARCHAR(255) NOT NULL, ProfilePic VARCHAR(255), UserId INT(11) NOT NULL,CONSTRAINT `UserIdCustomers` FOREIGN KEY (UserId) REFERENCES users (UserId) ON DELETE CASCADE ON UPDATE RESTRICT, NationalId INT(11),CONSTRAINT `NationalIdCustomers` FOREIGN KEY (NationalId) REFERENCES nationals (NationalId) ON DELETE CASCADE ON UPDATE RESTRICT , Promo INT(1)); -->
+<!-- CREATE TABLE employees (EmployeeId INT(11) PRIMARY KEY  NOT NULL AUTO_INCREMENT, FirstName VARCHAR(255) NOT NULL, LastName VARCHAR(255) NOT NULL, NationalIdCard VARCHAR(255), AddressLine1 VARCHAR(255), AddressLine2 VARCHAR(255), AddressLine3 VARCHAR(255), Telephone VARCHAR(255), Mobile VARCHAR(255), Title VARCHAR(255), RegNo VARCHAR(255) NOT NULL, ProfilePic VARCHAR(255), UserId INT(11) NOT NULL,CONSTRAINT `UserIdEmployee` FOREIGN KEY (UserId) REFERENCES users (UserId) ON DELETE CASCADE ON UPDATE RESTRICT); -->
+
+<!-- CREATE TABLE messages (MessageId INT(11) PRIMARY KEY  NOT NULL AUTO_INCREMENT, MessagePath VARCHAR(255) NOT NULL, MessageShort VARCHAR(255) NOT NULL, Date VARCHAR(255), UserIdFrom INT(11) NOT NULL,CONSTRAINT `UserIdMessagesFrom` FOREIGN KEY (UserIdFrom) REFERENCES users (UserId) ON DELETE CASCADE ON UPDATE RESTRICT, UserIdTo INT(11) NOT NULL,CONSTRAINT `UserIdMessagesTo` FOREIGN KEY (UserIdTo) REFERENCES users (UserId) ON DELETE CASCADE ON UPDATE RESTRICT, ProfileImagePath VARCHAR(255)); -->
+<!-- CREATE TABLE notes (NoteId INT(11) PRIMARY KEY  NOT NULL AUTO_INCREMENT, NotePath VARCHAR(255) NOT NULL, NoteShort VARCHAR(255) NOT NULL, Date VARCHAR(255), UserIdFrom INT(11) NOT NULL,CONSTRAINT `UserIdNotesFrom` FOREIGN KEY (UserIdFrom) REFERENCES users (UserId) ON DELETE CASCADE ON UPDATE RESTRICT, UserIdTo INT(11) NOT NULL,CONSTRAINT `UserIdNotesTo` FOREIGN KEY (UserIdTo) REFERENCES users (UserId) ON DELETE CASCADE ON UPDATE RESTRICT, Status INT(1)); -->
+
+<!-- insert into messages (MessagePath,MessageShort,Date,UserIdFrom,UserIdTo,ProfileImagePath) values("reception/messages.php","please cancel my reservation...","2024-03-15",1,2,"images/profile.png"); -->
+<!-- insert into notes (NotePath,NoteShort,Date,UserIdFrom,UserIdTo) values("reception/notes.php","check room service","2024-03-15",2,2); -->
+
+<!-- CREATE TABLE modules (ModuleId INT(11) PRIMARY KEY  NOT NULL AUTO_INCREMENT, ModuleName VARCHAR(255) NOT NULL, ModulePath VARCHAR(255) NOT NULL, ModuleClasses VARCHAR(255) NOT NULL, ModuleStatus INT(1)); -->
+<!-- CREATE TABLE user_modules (PrivilegeId INT(11) PRIMARY KEY  NOT NULL AUTO_INCREMENT, UserId INT(11) NOT NULL, CONSTRAINT `UserIdUserModules` FOREIGN KEY (UserId) REFERENCES users (UserId) ON DELETE CASCADE ON UPDATE RESTRICT, ModuleId INT(11) NOT NULL, CONSTRAINT `ModuleIdUserModules` FOREIGN KEY (ModuleId) REFERENCES modules (ModuleId) ON DELETE CASCADE ON UPDATE RESTRICT); -->
+
+<!-- insert into modules (ModuleName,ModulePath,ModuleClasses,ModuleStatus) values("Messages","reception/messages.php","fas fa-envelope me-2",1); -->
+<!-- insert into user_modules (UserId,ModuleId) values(2,1); -->
+
+<!-- UPDATE modules SET ModuleClasses="fas fa-clipboard me-2" WHERE ModuleName = "Dashboard"; -->
+<!-- <i class="fas fa-envelope"></i>
+<i class="fas fa-umbrella"></i>
+<i class="fas fa-file-invoice-dollar"></i>
+<i class="fas fa-bed"></i>
+<i class="fas fa-star-half-alt"></i>
+<i class="fas fa-pencil-alt"></i>
+<i class="fas fa-bell"></i>
+<i class="fas fa-user-tie"></i>
+<i class="fas fa-user"></i>
+<i class="fas fa-chart-line"></i>
+<i class="fas fa-user-lock"></i>
+<i class="fas fa-clipboard"></i> -->
+
+<!-- use sweet alert 2 lib for messages -->
+<!-- login to gmail 
+go to account (manage google accout)
+security
+2 step verification must be enabled
+search for 'app password' in settings security
+use project name as app name
+create
+copy app password -->
+
+<?php
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// require_once("std/classes.php");
+?>

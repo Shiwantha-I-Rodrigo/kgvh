@@ -5,15 +5,15 @@ if (!isset($_SESSION['user_id'])) {
     reDirect(SYSTEM_BASE_URL . "login.php");
 }
 $user_id = $_SESSION['user_id'];
-unauthorize($user_id, '4');
+unauthorize($user_id, '5');
 $db = dbConn();
-$form_title = "Customer Details";
+$form_title = "Employee Details";
 
-//load customer
+//load employee
 $update = false;
 if (isset($_GET['id'])) {
     $customer_id = htmlspecialchars($_GET["id"]);
-    $sql = "SELECT * FROM users u INNER JOIN customers c ON u.UserId = c.UserId WHERE u.UserId='$customer_id'";
+    $sql = "SELECT * FROM users u INNER JOIN employees c ON u.UserId = c.UserId WHERE u.UserId='$customer_id'";
     $result = $db->query($sql);
     $row = mysqli_fetch_array($result);
     $auser_name = $row["UserName"];
@@ -70,10 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($message)) {
 
         if ($update) {
-            $sql = "UPDATE `users` SET `UserName`='$user_name', `Password`='$password_hash',`Email`='$email',`Role`=5,`Status`='$status' WHERE `UserId` = $customer_id";
+            $sql = "UPDATE `users` SET `UserName`='$user_name', `Password`='$password_hash',`Email`='$email',`Role`='$role',`Status`='$status' WHERE `UserId` = $customer_id";
         } else {
             $pw_hash = password_hash($password, PASSWORD_BCRYPT);
-            $sql = "INSERT INTO `users`(`UserName`, `Password`,`Email`,`Role`,`Status`) VALUES ('$user_name','$pw_hash','$email',5,'$status')";
+            $sql = "INSERT INTO `users`(`UserName`, `Password`,`Email`,`Role`,`Status`) VALUES ('$user_name','$pw_hash','$email','$role','$status')";
         }
         $db->query($sql);
 
@@ -84,13 +84,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_name'] = $user_name;
 
         if ($update) {
-            $sql = "UPDATE `customers` SET `FirstName`='$first_name', `LastName`='$last_name', `NationalIdCard`='$nic', `AddressLine1`='$address1', `AddressLine2`='$address2', `AddressLine3`='$address3', `Telephone`='$telephone', `Mobile`='$mobile', `Title`='$title',`RegNo`='$reg_no', `ProfilePic`='images/profile.jpg', `UserId`='$customer_id', `NationalId`='$national_id', `Promo`=$promoint WHERE `UserId` = $customer_id ";
+            $sql = "UPDATE `employees` SET `FirstName`='$first_name', `LastName`='$last_name', `NationalIdCard`='$nic', `AddressLine1`='$address1', `AddressLine2`='$address2', `AddressLine3`='$address3', `Telephone`='$telephone', `Mobile`='$mobile', `Title`='$title',`RegNo`='$reg_no', `ProfilePic`='images/profile.jpg', `UserId`='$customer_id' WHERE `UserId` = $customer_id ";
         } else {
-            $sql = "INSERT INTO `customers`(`FirstName`, `LastName`, `NationalIdCard`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `Telephone`, `Mobile`, `Title`,`RegNo`, `ProfilePic`, `UserId`, `NationalId`, `Promo`) VALUES ('$first_name','$last_name','$nic','$address1','$address2','$address3','$telephone','$mobile','$title','$reg_no','images/profile.jpg','$user_id','$national_id',$promoint)";
+            $sql = "INSERT INTO `employees`(`FirstName`, `LastName`, `NationalIdCard`, `AddressLine1`, `AddressLine2`, `AddressLine3`, `Telephone`, `Mobile`, `Title`,`RegNo`, `ProfilePic`, `UserId`) VALUES ('$first_name','$last_name','$nic','$address1','$address2','$address3','$telephone','$mobile','$title','$reg_no','images/profile.jpg','$user_id')";
         }
         $db->query($sql);
 
-        $modules = [12];
+        $admin = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        $manager = [1, 3, 4, 5, 6, 7, 8, 9, 12];
+        $receptionist = [1, 4, 6, 7, 10, 11, 12];
+        $travel = [1, 6, 11, 12];
+        $customer = [12];
+
+        if ($role == 1) {
+            $modules = $admin;
+        } elseif ($role == 2) {
+            $modules = $manager;
+        } elseif ($role == 3) {
+            $modules = $receptionist;
+        } elseif ($role == 4) {
+            $modules = $travel;
+        } else {
+            $modules = $customer;
+        }
 
         if (!$update) {
             foreach ($modules as $module) {
@@ -228,6 +244,18 @@ ob_start();
 
             <div class="row">
                 <div class="col-6">
+                    <label class="row">User Role</label>
+                    <select name="role" id="role" class="form-control inputs row">
+                        <option value="4" <?= $arole == 4 ? "selected" : ""; ?>>Travel Solution</option>
+                        <option value="3" <?= $arole == 3 ? "selected" : ""; ?>>Receptionist</option>
+                        <option value="2" <?= $arole == 2 ? "selected" : ""; ?>>Manager</option>
+                        <option value="1" <?= $arole == 1 ? "selected" : ""; ?>>Admin</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
                     <label class="row">Mobile</label>
                     <span class="text-danger row"><?= @$message['mobile'] ?></span>
                     <input type="text" class="form-control inputs row" name="mobile" id="mobile" placeholder="Mobile No." maxlength="18" value="<?= $amobile ?>" />
@@ -247,21 +275,7 @@ ob_start();
                     <input type="text" class="form-control inputs row" name="address2" id="address2" placeholder="City" value="<?= $aaddress2 ?>" />
                     <input type="text" class="form-control inputs row" name="address3" id="address3" placeholder="Province or Region" value="<?= $aaddress3 ?>" />
                 </div>
-                <?php
-                $sql = "SELECT * FROM  nationals";
-                $result = $db->query($sql);
-                ?>
                 <div class="col-6">
-                    <label class="row">Nationality</label>
-                    <select name="national_id" id="national_id" class="form-control inputs row">
-                        <?php
-                        while ($row = $result->fetch_assoc()) {
-                        ?>
-                            <option value="<?= $row['NationalId'] ?>" <?= $anational_id == $row['NationalId'] ? "selected" : ""; ?>><?= $row['NationalName'] ?></option>
-                        <?php
-                        }
-                        ?>
-                    </select>
                     <label class="row">Account Status</label>
                     <select name="status" id="status" class="form-control inputs row">
                         <option value="1" <?= $astatus == 1 ? "selected" : ""; ?>>Enabled</option>
@@ -291,7 +305,7 @@ ob_start();
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/system/modals.php';
 $page_content = ob_get_clean();
-$page_title = "Customers";
+$page_title = "Employees";
 $user_image = $_SESSION['profile_pic'];
 $first_name = $_SESSION['first_name'];
 $_SESSION['employee_role'] == 1 ? $user_role = "Admin" : ($_SESSION['employee_role'] == 2 ? $user_role = "Manager" : ($_SESSION['employee_role'] ? $user_role = "Receptionist" : $user_role = "Travel Solution"));

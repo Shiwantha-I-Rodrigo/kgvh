@@ -21,6 +21,7 @@ if (isset($_GET['id'])) {
             $sql = "DELETE FROM users where UserId=$record_id";
             break;
         case '5':
+            $sql = "DELETE FROM users where UserId=$record_id";
             break;
         case '6':
             break;

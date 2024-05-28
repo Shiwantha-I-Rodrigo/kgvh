@@ -86,7 +86,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/system/header.php';
 
                             <?php while ($row = $notes->fetch_assoc()) { ?>
                                 <a href="<?= SYSTEM_BASE_URL ?><?= $row['NotePath'] ?>" class="dropdown-item">
-                                    <h6 class="fw-normal mb-0"><?= $row['NoteShort'] ?></h6>
+                                    <h6 class="fw-normal mb-0"><?= $row['NotePath'] ?></h6>
                                     <small><?= $row['Date'] ?></small>
                                 </a>
                                 <hr class="dropdown-divider">

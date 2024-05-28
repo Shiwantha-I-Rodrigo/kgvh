@@ -50,7 +50,7 @@ ob_start();
                                     <td><?= role($row['Role']); ?></td>
                                     <td>
                                         <a href="employees_form.php?id=<?= $row['UserId'] ?>"><button class="crit_btn"><i class="fas fa-edit"></i></button></a>
-                                        <a href="employees_delete.php?id=<?= $row['UserId'] ?>"><button class="common_btn ms-2"><i class="fa fa-trash"></i></button></a>
+                                        <a href="<?=SYSTEM_BASE_URL?>delete.php?id=<?= $row['UserId'] ?>&asset=5"><button class="common_btn ms-2"><i class="fa fa-trash"></i></button></a>
                                     </td>
                                 </tr>
 
